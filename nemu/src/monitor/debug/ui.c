@@ -74,9 +74,13 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_x(char *args) {
-	//int n;
-	//n = strtok(args," ");
-	//printf("n\n");
+	if(args == NULL) {
+		printf("Need More Arguements!\n");
+		return 0;
+	}
+	int n,addr;
+	sscanf(args, "%d %x",&n, &addr);
+	printf("%d %x\n",n,addr);
 	return 0;
 }
 
