@@ -8,8 +8,8 @@
 
 enum {
 	NOTYPE = 256,
-	PLUS, MINUS, MUL, DIV, 
 	EQ, NEQ, AND, OR,
+	PLUS, MINUS, MUL, DIV,
 	NOT, STAR, NEG,
 	LEFT, RIGHT, 
 	HEX, DEC, REG
