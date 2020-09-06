@@ -100,7 +100,7 @@ static bool make_token(char *e) {
 					nr_token++;
 					break;
 					case(MINUS): // minus neg
-					if(nr_token>0 && tokens[nr_token-1].type <= LEFT) {
+					if(nr_token==0 || tokens[nr_token-1].type <= LEFT) {
 						tokens[nr_token].type = NEG; 
                                         } else {
 						tokens[nr_token].type = MINUS;
@@ -108,7 +108,7 @@ static bool make_token(char *e) {
 					nr_token++;
                                         break;
 					case(MUL): // mul star
-					if(nr_token>0 && tokens[nr_token-1].type <= LEFT){
+					if(nr_token==0 || tokens[nr_token-1].type <= LEFT){
 						tokens[nr_token].type = STAR; 
                                         } else {
 						tokens[nr_token].type = MUL;
