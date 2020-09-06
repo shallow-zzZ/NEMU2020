@@ -213,13 +213,9 @@ uint32_t eval(int p, int q){
 		} else if (tokens[p].type == REG) {
 			int i;
 			for(i=0;i<8;i++){
-				if(strcasecmp(tokens[p].str+1,regsl[i])){
-					printf("%s %s\n",tokens[p].str,regsl[i]);
-					//printf("32_%d\n",i);
-					n = reg_l(i);
-				}
-				if(strcasecmp(tokens[p].str,regsw[i])) n = reg_w(i);
-				if(strcasecmp(tokens[p].str,regsb[i])) n = reg_b(i);
+				if(!strcasecmp(tokens[p].str+1,regsl[i])) n = reg_l(i);
+				if(!strcasecmp(tokens[p].str+1,regsw[i])) n = reg_w(i);
+				if(!strcasecmp(tokens[p].str+1,regsb[i])) n = reg_b(i);
 			}
 		} else {
 			assert(0);
