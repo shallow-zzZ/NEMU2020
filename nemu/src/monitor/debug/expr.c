@@ -10,8 +10,8 @@ enum {
 	NOTYPE = 256,
 	PLUS, MINUS, MUL, DIV, 
 	EQ, NEQ, AND, OR,
-	LEFT, RIGHT, 
 	NOT, STAR, NEG,
+	LEFT, RIGHT, 
 	HEX, DEC, REG
 
 	/* TODO: Add more token types */
@@ -99,11 +99,21 @@ static bool make_token(char *e) {
 					case(PLUS): tokens[nr_token].type = PLUS;
 					nr_token++;
 					break;
-					case(MINUS): tokens[nr_token].type = MINUS; // minus / neg
-                                        nr_token++;
+					case(MINUS): // minus neg
+					if(nr_token>0 && tokens[nr_token-1].type <= LEFT) {
+						tokens[nr_token].type = NEG; 
+                                        } else {
+						tokens[nr_token].type = MINUS;
+					}
+					nr_token++;
                                         break;
-					case(MUL): tokens[nr_token].type = MUL; // mul / star
-                                        nr_token++;
+					case(MUL): // mul star
+					if(nr_token>0 && tokens[nr_token-1].type <= LEFT){
+						tokens[nr_token].type = STAR; 
+                                        } else {
+						tokens[nr_token].type = MUL;
+					}
+					nr_token++;
                                         break;
                                         case(DIV): tokens[nr_token].type = DIV;
                                         nr_token++;
