@@ -5,6 +5,7 @@
 
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
+static int nr_wp;
 
 void init_wp_pool() {
 	int i;
@@ -15,6 +16,7 @@ void init_wp_pool() {
 	wp_pool[NR_WP - 1].next = NULL;
 
 	head = NULL;
+	nr_wp = 0;
 	free_ = wp_pool;
 }
 
@@ -25,20 +27,17 @@ WP* new_wp() {
 	assert(wp != NULL);
 	free_ = free_->next;
 	wp->next = NULL;
+	wp->NO = nr_wp++;
 	if(head == NULL) {
 		head = wp;
-		wp->NO = 0;
-		assert(head!=NULL);
+		wp->NO = nr_wp++;
 	}else {
-		int cnt=1; WP *pos = head;
+		WP *pos = head;
 		while(pos->next != NULL) {
 			pos = pos->next;
-			cnt ++;
 		}
-		wp->NO = cnt;
 		pos->next = wp;
 	}
-	assert(head!=NULL);
 	return wp;
 }
 
@@ -50,7 +49,6 @@ void free_wp(WP *wp) {
 		pos = pos->next;
 		wp->next = free_;
 		free_ = wp;
-		return ;
 	}else {
 		while(pos->next != NULL) {
 			if(pos->next == wp){
@@ -67,6 +65,7 @@ void free_wp(WP *wp) {
 		pos->NO --;
 		pos = pos->next;
 	}
+	nr_wp--;
 	return ;
 }
 
