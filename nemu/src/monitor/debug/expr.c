@@ -211,23 +211,12 @@ uint32_t eval(int p, int q){
 		} else if (tokens[p].type == DEC) {
 			sscanf(tokens[p].str,"%d",&n);
 		} else if (tokens[p].type == REG) {
-			if(strcasecmp(tokens[p].str, "eax")){
-				n = cpu.eax;
-			} else if(strcasecmp(tokens[p].str, "edx")){
-				n = cpu.edx;
-                        } else if(strcasecmp(tokens[p].str, "ecx")){
-				n = cpu.ecx;
-                        } else if(strcasecmp(tokens[p].str, "ebx")){
-				n = cpu.ebx;
-                        } else if(strcasecmp(tokens[p].str, "ebp")){
-				n = cpu.ebp;
-                        } else if(strcasecmp(tokens[p].str, "esi")){
-				n = cpu.esi;
-                        } else if(strcasecmp(tokens[p].str, "edi")){
-				n = cpu.edi;
-                        } else if(strcasecmp(tokens[p].str, "esp")){
-				n = cpu.esp;
-                        } else {n = 0;}
+			int i;
+			for(i=0;i<8;i++){
+				if(strcasecmp(tokens[p].str,regsl[i])) n = reg_l(i);
+				if(strcasecmp(tokens[p].str,regsw[i])) n = reg_w(i);
+				if(strcasecmp(tokens[p].str,regsb[i])) n = reg_b(i);
+			}
 		} else {
 			assert(0);
 		}
