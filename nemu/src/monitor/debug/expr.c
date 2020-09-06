@@ -171,7 +171,7 @@ static bool make_token(char *e) {
 }
 
 uint32_t find_dominant(int p, int q) {
-	int i,id=-1,flag=0,minn=OR;
+	int i,id=-1,flag=0,minn=LEFT;
 	for(i=q;i>=p;i--){
 		if(flag>0){
 			if(tokens[i].type == LEFT) flag--;
