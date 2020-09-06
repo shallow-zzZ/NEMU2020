@@ -71,7 +71,7 @@ static int cmd_i(char *args) {
 
 static int cmd_p(char *args) {
 	bool *flag = false;
-	printf("epression: %s  result: %d\n",args,expr(args,flag));
+	printf("epression: %s  result: 0x%x\n",args,expr(args,flag));
 	return 0;
 }
 
