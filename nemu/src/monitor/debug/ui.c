@@ -98,7 +98,7 @@ static int cmd_w(char *args) {
 	wp = new_wp();
 	strncpy(wp->str,args,strlen(args)+1);
 	wp->result = cmd_p(args);
-	printf("0x%x\n",wp->result);
+	//printf("0x%x\n",wp->result);
 	return 0;
 }
 
