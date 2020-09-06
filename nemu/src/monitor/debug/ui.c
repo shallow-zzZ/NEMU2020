@@ -89,6 +89,28 @@ static int cmd_x(char *args) {
 	return 0;
 }
 
+static int cmd_w(char *args) {
+	if(args == NULL) {
+		printf("Nedd More Arguement!\n");
+		return 0;
+	}
+	WP* wp ;
+	wp = new_wp();
+	wp->exp = args;
+	return 0;
+}
+
+static int cmd_d(char *args) {
+	if(args == NULL) {
+                printf("Nedd More Arguement!\n");
+                return 0;
+        }
+	int no;
+	sscanf(args, "%d", &no);
+	free_wp(no);
+	return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -101,6 +123,8 @@ static struct {
 	{ "info", "Check status of the program", cmd_i},
 	{ "p", "calculate the expression", cmd_p},
 	{ "x", "Scan the memory", cmd_x}, 
+	{ "w", "Set the watchpoint", cmd_w},
+	{ "d", "Delete the watchpoint", cmd_d}, 
 	/* TODO: Add more commands */
 
 };
