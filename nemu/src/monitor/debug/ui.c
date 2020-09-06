@@ -78,9 +78,12 @@ static int cmd_x(char *args) {
 		printf("Need More Arguements!\n");
 		return 0;
 	}
-	int n,addr;
+	int n,addr,i=0;
 	sscanf(args, "%d %x",&n, &addr);
-	printf("%d %x\n", n, addr);
+	for(i=0;i<n;i++) {
+		printf("addr 0x%x: 0x%x", addr, swaddr_read(addr,4));
+		addr+=4;
+	}
 	return 0;
 }
 
