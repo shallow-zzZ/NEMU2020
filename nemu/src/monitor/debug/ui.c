@@ -70,6 +70,8 @@ static int cmd_i(char *args) {
 }
 
 static int cmd_p(char *args) {
+	bool *flag = false;
+	expr(args,flag);
 	return 0;
 }
 
