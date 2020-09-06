@@ -74,6 +74,9 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_x(char *args) {
+	//int n;
+	//n = strtok(args," ");
+	//printf("n\n");
 	return 0;
 }
 
@@ -86,7 +89,7 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si", "Execute by steps", cmd_si},
-	{ "i", "Check status of the program", cmd_i},
+	{ "info", "Check status of the program", cmd_i},
 	{ "p", "calculate the expression", cmd_p},
 	{ "x", "Scan the memory", cmd_x}, 
 	/* TODO: Add more commands */
