@@ -64,11 +64,7 @@ static int cmd_i(char *args) {
 		printf("$edi: 0x%x\n", cpu.edi);
 		printf("$esp: 0x%x\n", cpu.esp);
 	} else{
-		WP *wp = head;
-		while(wp != NULL) {
-			printf("WatchPoint%d: expression: %s\n",wp->NO, wp->exp);
-			wp = wp->next;
-		}
+		info_wp();
 	}
 	return 0;	
 }
@@ -95,28 +91,24 @@ static int cmd_x(char *args) {
 
 static int cmd_w(char *args) {
 	if(args == NULL) {
-		printf("Nedd More Arguement!\n");
+		printf("Need More Arguement!\n");
 		return 0;
 	}
 	WP* wp ;
 	wp = new_wp();
 	wp->exp = args;
 	printf("%d\n",wp->NO);
-	//assert(head!=NULL);
 	return 0;
 }
 
 static int cmd_d(char *args) {
 	if(args == NULL) {
-                printf("Nedd More Arguement!\n");
+                printf("Need More Arguement!\n");
                 return 0;
         }
 	int no;
 	sscanf(args, "%d", &no);
-	WP *wp = head;
-	while(wp!=NULL && wp->NO!=no){
-		wp = wp->next;
-	}
+	WP *wp = cal_wp(no);
 	free_wp(wp);
 	return 0;
 }

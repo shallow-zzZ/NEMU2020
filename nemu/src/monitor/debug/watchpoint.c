@@ -4,7 +4,7 @@
 #define NR_WP 32
 
 static WP wp_pool[NR_WP];
-static WP *free_;
+static WP *head, *free_;
 
 void init_wp_pool() {
 	int i;
@@ -68,4 +68,19 @@ void free_wp(WP *wp) {
 		pos = pos->next;
 	}
 	return ;
+}
+
+void info_wp() {
+	WP* wp = head;
+	while(wp != NULL){
+		printf("WatchPoint%d : expression: %s\n",wp->NO,wp->exp);
+	}
+}
+
+WP *cal_wp(int no) {
+	WP* wp = head;
+	while(wp!=NULL && wp->NO<no){
+		wp = wp->next;
+	}
+	return wp;
 }
