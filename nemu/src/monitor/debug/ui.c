@@ -50,6 +50,15 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_i(char *args) {
+	if(args == NULL) {
+		printf("Need More Arguements!\n");
+		return 0;
+	}
+	if(strcmp(args,"r")) {
+		printf("$eax: 0x%x",cpu.eax);
+	} else{
+		
+	}
 	return 0;	
 }
 
