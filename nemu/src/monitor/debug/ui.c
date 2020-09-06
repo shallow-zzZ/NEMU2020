@@ -102,6 +102,7 @@ static int cmd_w(char *args) {
 	WP* wp ;
 	wp = new_wp();
 	wp->exp = args;
+	assert(head!=NULL);
 	return 0;
 }
 
