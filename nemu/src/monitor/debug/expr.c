@@ -205,12 +205,33 @@ uint32_t eval(int p, int q){
 	if(p>q){  // bad expression
 		return 0;
 	}else if(p==q){
-		switch(tokens[p].type){
-			case(HEX): return 1;
-			case(DEC): return 1;
-			case(REG): return 1;
-			default: assert(0);
+		int n;
+		if(tokens[p].type == HEX) {
+			sscanf(tokens[p].str,"%x",&n);
+		} else if (tokens[p].type == DEC) {
+			sscanf(tokens[p].str,"%d",&n);
+		} else if (tokens[p].type == REG) {
+			if(strcasecmp(tokens[p].str, "eax")){
+				n = cpu.eax;
+			} else if(strcasecmp(tokens[p].str, "edx")){
+				n = cpu.edx;
+                        } else if(strcasecmp(tokens[p].str, "ecx")){
+				n = cpu.ecx;
+                        } else if(strcasecmp(tokens[p].str, "ebx")){
+				n = cpu.ebx;
+                        } else if(strcasecmp(tokens[p].str, "ebp")){
+				n = cpu.ebp;
+                        } else if(strcasecmp(tokens[p].str, "esi")){
+				n = cpu.esi;
+                        } else if(strcasecmp(tokens[p].str, "edi")){
+				n = cpu.edi;
+                        } else if(strcasecmp(tokens[p].str, "esp")){
+				n = cpu.esp;
+                        } else {n = 0;}
+		} else {
+			assert(0);
 		}
+		return n;
 	}else if(check_parentheses(p,q)==true){
 		return eval(p+1,q-1);
 	}else{
