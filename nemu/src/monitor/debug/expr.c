@@ -13,7 +13,7 @@ enum {
 	NOT, STAR, NEG,
 	LEFT, RIGHT, 
 	HEX, DEC, REG
-
+	// HEX > DEC 
 	/* TODO: Add more token types */
 
 };
