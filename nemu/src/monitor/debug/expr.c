@@ -7,7 +7,12 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ
+	NOTYPE = 256,
+	PLUS, MINUS, MUL, DIV, 
+	EQ, NEQ, AND, OR,
+	LEFT, RIGHT, 
+	NOT, STAR, NEG,
+	HEX, DEC, REG
 
 	/* TODO: Add more token types */
 
@@ -23,8 +28,20 @@ static struct rule {
 	 */
 
 	{" +",	NOTYPE},				// spaces
-	{"\\+", '+'},					// plus
-	{"==", EQ}						// equal
+	{"\\+", PLUS},					// plus
+	{"-", MINUS},                                   // minus
+	{"\\*", MUL},                                   // mul
+	{"/", DIV},                                     // div
+	{"==", EQ},					// equal
+	{"!=", NEQ},                                    // not equal
+	{"\\&\\&", AND},                                // and
+	{"\\|\\|", OR},                             	// or
+	{"\\(", LEFT},                                  // left
+	{"\\)", RIGHT},                                 // right
+	{"!", NOT},                                     // not
+	{"0[xX][0-9a-fA-F]+", HEX},                     // hex
+	{"[0-9]+", DEC},                                // dec
+	{"\\$[a-zA-Z]{2,3}", REG}                       // register
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -79,6 +96,54 @@ static bool make_token(char *e) {
 				 */
 
 				switch(rules[i].token_type) {
+					case(PLUS): tokens[nr_token].type = PLUS;
+					nr_token++;
+					break;
+					case(MINUS): tokens[nr_token].type = MINUS; // minus / neg
+                                        nr_token++;
+                                        break;
+					case(MUL): tokens[nr_token].type = MUL; // mul / star
+                                        nr_token++;
+                                        break;
+                                        case(DIV): tokens[nr_token].type = DIV;
+                                        nr_token++;
+                                        break;
+                                        case(EQ): tokens[nr_token].type = EQ;
+                                        nr_token++;
+                                        break;
+                                        case(NEQ): tokens[nr_token].type = NEQ;
+                                        nr_token++;
+                                        break;
+                                        case(AND): tokens[nr_token].type = AND;
+                                        nr_token++;
+                                        break;
+                                        case(OR): tokens[nr_token].type = OR;
+                                        nr_token++;
+                                        break;
+                                        case(NOT): tokens[nr_token].type = NOT;
+                                        nr_token++;
+                                        break;
+                                        case(HEX): tokens[nr_token].type = HEX;
+					strncpy(tokens[nr_token].str, substr_start, ((substr_len>31)?31:substr_len) + 1);
+                                        nr_token++;
+                                        break;
+                                        case(DEC): tokens[nr_token].type = DEC;
+					strncpy(tokens[nr_token].str, substr_start, ((substr_len>31)?31:substr_len) + 1);
+                                        nr_token++;
+                                        break;
+                                        case(REG): tokens[nr_token].type = REG;
+					strncpy(tokens[nr_token].str, substr_start, substr_len + 1);
+                                        nr_token++;
+                                        break;
+                                        case(LEFT): tokens[nr_token].type = LEFT;
+                                        nr_token++;
+                                        break;
+                                        case(RIGHT): tokens[nr_token].type = RIGHT;
+                                        nr_token++;
+                                        break;
+                                        case(NOTYPE): tokens[nr_token].type = NOTYPE;
+                                        nr_token++;
+                                        break;
 					default: panic("please implement me");
 				}
 
