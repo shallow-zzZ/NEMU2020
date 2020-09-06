@@ -64,6 +64,7 @@ static int cmd_i(char *args) {
 		printf("$edi: 0x%x\n", cpu.edi);
 		printf("$esp: 0x%x\n", cpu.esp);
 	} else{
+		printf("w\n");
 		WP *wp = head;
 		while(wp != NULL) {
 			printf("WatchPoint%d: expression: %s\n",wp->NO, wp->exp);
