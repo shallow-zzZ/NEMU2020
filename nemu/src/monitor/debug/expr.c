@@ -214,7 +214,8 @@ uint32_t eval(int p, int q){
 			int i;
 			for(i=0;i<8;i++){
 				if(strcasecmp(tokens[p].str+1,regsl[i])){
-					printf("32_%d\n",i);
+					printf("%s %s\n",tokens[p].str,regsl[i]);
+					//printf("32_%d\n",i);
 					n = reg_l(i);
 				}
 				if(strcasecmp(tokens[p].str,regsw[i])) n = reg_w(i);
