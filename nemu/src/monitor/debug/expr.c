@@ -170,8 +170,69 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+uint32_t find_dominant(int p, int q) {
+	int i,id=-1,flag=0,minn=OR;
+	for(i=q;i>=p;i--){
+		if(flag>0){
+			if(tokens[i].type == LEFT) flag--;
+			if(tokens[i].type == RIGHT) flag++;
+		}else{
+			if(tokens[i].type <= minn){
+				minn = tokens[i].type;
+				id = i;
+			} else if(tokens[i].type == RIGHT){
+				flag ++;
+			}
+		}
+	}
+	return id;
+}
+
+bool check_parentheses(int p, int q) {
+	if(tokens[p].type == LEFT && tokens[q].type == RIGHT){
+		int i,flag=1;
+		for(i=p+1;i<q;i++){
+			if(tokens[i].type == LEFT) flag++;
+			if(tokens[i].type == RIGHT) flag--;
+			if(!flag) return false;
+		}
+		return (flag==1);
+	}
+	return false;
+}
+
 uint32_t eval(int p, int q){
-	return 0;
+	if(p>q){  // bad expression
+		return 0;
+	}else if(p==q){
+		switch(tokens[p].type){
+			case(HEX): return 1;
+			case(DEC): return 1;
+			case(REG): return 1;
+			default: assert(0);
+		}
+	}else if(check_parentheses(p,q)==true){
+		return eval(p+1,q-1);
+	}else{
+		int op = find_dominant(p,q);
+		assert(op!=-1);
+		uint32_t val1 = eval(p,op-1);
+		uint32_t val2 = eval(op+1,q);
+		switch(tokens[op].type){
+			case(PLUS): return val1+val2;
+			case(MINUS): return val1-val2;
+			case(MUL): return val1*val2;
+			case(DIV): return val1/val2;
+			case(EQ): return (val1==val2);
+			case(NEQ): return (val1!=val2);
+			case(AND): return (val1&&val2);
+			case(OR): return (val1||val2);
+			case(NEG): return (-val2);
+			case(NOT): return (!val2);
+			case(STAR): return swaddr_read(val2,4);
+			default: assert(0);
+		}
+	}
 }
 
 uint32_t expr(char *e, bool *success) {
