@@ -8,7 +8,7 @@
 
 enum {
 	NOTYPE = 256,
-	EQ, NEQ, AND, OR,
+	EQ, NEQ, OR, AND, 
 	PLUS, MINUS, MUL, DIV,
 	NOT, STAR, NEG,
 	LEFT, RIGHT, 
@@ -178,7 +178,13 @@ uint32_t find_dominant(int p, int q) {
 			if(tokens[i].type == RIGHT) flag++;
 		}else{
 			if(tokens[i].type <= minn){
-				minn = tokens[i].type;
+				if(tokens[i].type >= NOT && tokens[i].type <= NEG){
+					minn = NEG;
+				} else if(tokens[i].type == EQ || tokens[i].type == NEQ) {
+					minn = DIV;
+				} else {
+					minn = tokens[i].type;
+				}
 				id = i;
 			} else if(tokens[i].type == RIGHT){
 				flag ++;
@@ -251,8 +257,6 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	/* TODO: Insert codes to evaluate the expression. */
-	return eval(0,nr_token-1);
-	panic("please implement me");
 	return eval(0,nr_token-1);
 }
 
