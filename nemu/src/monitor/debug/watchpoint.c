@@ -96,6 +96,7 @@ bool check_wp() {
 			printf("WatchPoint%d changed! result_1: 0x%x   result_2: 0x%x\n", wp->NO, wp->result, result_now);
 			keep = false;
 		}
+		wp = wp->next;
 	}
 	return keep;
 }
