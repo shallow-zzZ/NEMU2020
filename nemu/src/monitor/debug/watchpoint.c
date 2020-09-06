@@ -4,7 +4,7 @@
 #define NR_WP 32
 
 static WP wp_pool[NR_WP];
-static WP *head, *free_;
+static WP *free_;
 
 void init_wp_pool() {
 	int i;
@@ -40,12 +40,9 @@ WP* new_wp() {
 	return wp;
 }
 
-void free_wp(int no) {
-	WP* pos = head, *wp = head;
-	while(wp!=NULL && wp->NO!=no){
-		wp = wp->next;
-	}
+void free_wp(WP *wp) {
 	assert(wp!=NULL);
+	WP *pos = head;
 	if(pos == wp) {
 		head = head->next;
 		pos = pos->next;

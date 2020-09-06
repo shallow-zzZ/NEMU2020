@@ -64,7 +64,11 @@ static int cmd_i(char *args) {
 		printf("$edi: 0x%x\n", cpu.edi);
 		printf("$esp: 0x%x\n", cpu.esp);
 	} else{
-		printf("UNCOMPLISHED!\n");
+		WP *wp = head;
+		while(wp != NULL) {
+			printf("WatchPoint%d: expression: %s\n",wp->NO, wp->exp);
+			wp = wp->next;
+		}
 	}
 	return 0;	
 }
@@ -107,7 +111,11 @@ static int cmd_d(char *args) {
         }
 	int no;
 	sscanf(args, "%d", &no);
-	free_wp(no);
+	WP *wp = head;
+	while(wp!=NULL && wp->NO!=no){
+		wp = wp->next;
+	}
+	free_wp(wp);
 	return 0;
 }
 
