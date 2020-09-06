@@ -5,6 +5,7 @@
 
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
+
 static int nr_wp;
 
 void init_wp_pool() {
@@ -72,7 +73,7 @@ void free_wp(WP *wp) {
 void info_wp() {
 	WP* wp = head;
 	while(wp != NULL){
-		printf("WatchPoint%d : expression: %s origin_result: %x\n",wp->NO,wp->str,wp->result);
+		printf("WatchPoint%d : expression: %s       origin_result: %x\n",wp->NO,wp->str,wp->result);
 		wp = wp->next;
 	}
 }
@@ -83,4 +84,18 @@ WP *cal_wp(int no) {
 		wp = wp->next;
 	}
 	return wp;
+}
+
+bool check_wp() {
+	WP *wp = head;
+	bool keep = true;
+	while(wp!=NULL){
+		bool flag;
+		uint32_t result_now = expr(wp->str,&flag);
+		if(result_now != wp->result){
+			printf("WatchPoint%d changed! result_1: 0x%x   result_2: 0x%x\n", wp->NO, wp->result, result_now);
+			keep = false;
+		}
+	}
+	return keep;
 }
