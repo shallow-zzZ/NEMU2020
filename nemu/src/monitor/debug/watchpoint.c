@@ -38,6 +38,7 @@ WP* new_wp() {
 		wp->NO = cnt;
 		pos->next = wp;
 	}
+	assert(head!=NULL);
 	return wp;
 }
 
