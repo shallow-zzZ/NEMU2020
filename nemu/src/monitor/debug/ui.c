@@ -54,10 +54,17 @@ static int cmd_i(char *args) {
 		printf("Need More Arguements!\n");
 		return 0;
 	}
-	if(strcmp(args,"r")) {
-		printf("$eax: 0x%x",cpu.eax);
+	if(!strcmp(args,"r")) {
+		printf("$eax: 0x%x\n", cpu.eax);
+		printf("$edx: 0x%x\n", cpu.edx);
+		printf("$ecx: 0x%x\n", cpu.ecx);
+		printf("$ebx: 0x%x\n", cpu.ebx);
+		printf("$ebp: 0x%x\n", cpu.ebp);
+		printf("$esi: 0x%x\n", cpu.esi);
+		printf("$edi: 0x%x\n", cpu.edi);
+		printf("$esp: 0x%x\n", cpu.esp);
 	} else{
-		
+		printf("UNCOMPLISHED!\n");
 	}
 	return 0;	
 }
