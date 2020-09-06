@@ -28,6 +28,7 @@ WP* new_wp() {
 	if(head == NULL) {
 		head = wp;
 		wp->NO = 0;
+		printf("insert!\n");
 	}else {
 		int cnt=1; WP *pos = head;
 		while(pos->next != NULL) {
