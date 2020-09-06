@@ -74,6 +74,7 @@ void info_wp() {
 	WP* wp = head;
 	while(wp != NULL){
 		printf("WatchPoint%d : expression: %s\n",wp->NO,wp->exp);
+		wp = wp->next;
 	}
 }
 
