@@ -80,7 +80,7 @@ static int cmd_x(char *args) {
 	}
 	int n,addr;
 	sscanf(args, "%d %x",&n, &addr);
-	printf("%d %x\n",n,addr);
+	printf("%d %x\n", n, addr);
 	return 0;
 }
 
