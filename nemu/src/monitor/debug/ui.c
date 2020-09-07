@@ -85,7 +85,7 @@ static int cmd_x(char *args) {
 	char num[30];
 	sscanf(args, "%s",num);
 	sscanf(num, "%d", &n);
-	args += strlen(num);
+	args += strlen(num)+1;
 	printf("%s\n",args);
 	bool flag = true;
 	addr = expr(args, &flag);
