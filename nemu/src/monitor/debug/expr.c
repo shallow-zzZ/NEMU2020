@@ -165,7 +165,7 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
-
+	assert(nr_token);
 	return true; 
 }
 
