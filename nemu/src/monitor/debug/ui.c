@@ -72,7 +72,7 @@ static int cmd_i(char *args) {
 static int cmd_p(char *args) {
 	bool *flag = false;
 	printf("epression: %s  result: 0x%x\n",args,expr(args,flag));
-	return expr(args,flag);
+	return 0;
 }
 
 static int cmd_x(char *args) {
@@ -97,7 +97,8 @@ static int cmd_w(char *args) {
 	WP* wp ;
 	wp = new_wp();
 	strncpy(wp->str,args,strlen(args)+1);
-	wp->result = cmd_p(args);
+	bool flag = true;
+	wp->result = expr(args,&flag);
 	//printf("0x%x\n",wp->result);
 	return 0;
 }
