@@ -234,7 +234,7 @@ uint32_t eval(int p, int q){
 		return eval(p+1,q-1);
 	}else{
 		int op = find_dominant(p,q);
-		if(op==-1) printf("Invalid expression!\n");
+		if(op == -1) printf("Invalid expression!\n");
 		Assert(op!=-1,"Invalid expression!\n");
 		int val1 = (int)(eval(p,op-1));
 		int val2 = (int)(eval(op+1,q));
