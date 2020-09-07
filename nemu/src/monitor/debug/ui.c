@@ -84,7 +84,6 @@ static int cmd_x(char *args) {
 	int n,addr,i;
 	char exp_str[100];
 	sscanf(args, "%d %s",&n, exp_str);
-	printf("%s\n", exp_str);
 	bool flag = true;
 	addr = expr(exp_str, &flag);
 	for(i=0;i<n;i++) {
