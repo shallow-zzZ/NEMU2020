@@ -223,6 +223,9 @@ uint32_t eval(int p, int q){
 				if(!strcasecmp(tokens[p].str+1,regsw[i])) n = reg_w(i);
 				if(!strcasecmp(tokens[p].str+1,regsb[i])) n = reg_b(i);
 			}
+			if(!strcasecmp(tokens[p].str,"$eip")){
+				n = cpu.eip;
+			}
 		} else {
 			assert(0);
 		}

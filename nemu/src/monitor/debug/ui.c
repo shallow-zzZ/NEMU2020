@@ -63,6 +63,7 @@ static int cmd_i(char *args) {
 		printf("$esi: 0x%x\n", cpu.esi);
 		printf("$edi: 0x%x\n", cpu.edi);
 		printf("$esp: 0x%x\n", cpu.esp);
+		printf("$eip: 0x%x\n", cpu.eip);
 	} else{
 		info_wp();
 	}
