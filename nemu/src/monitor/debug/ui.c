@@ -82,7 +82,7 @@ static int cmd_x(char *args) {
 		return 0;
 	}
 	int n,addr,i;
-	char num[30];
+	char num[50];
 	sscanf(args, "%s",num);
 	sscanf(num, "%d", &n);
 	args += strlen(num)+1;
