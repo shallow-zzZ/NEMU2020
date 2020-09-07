@@ -83,6 +83,7 @@ static int cmd_x(char *args) {
 	}
 	int n,addr,i;
 	sscanf(args, "%d",&n);
+	args += sizeof(n);
 	printf("%s\n", args);
 	bool flag = true;
 	addr = expr(args, &flag);
