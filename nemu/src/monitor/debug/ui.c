@@ -82,7 +82,7 @@ static int cmd_x(char *args) {
 		return 0;
 	}
 	int n,addr,i;
-	char exp_str[100];
+	char *exp_str = NULL;
 	sscanf(args, "%d %s",&n, exp_str);
 	printf("%s\n", exp_str);
 	bool flag = true;
