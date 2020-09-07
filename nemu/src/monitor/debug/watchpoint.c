@@ -31,7 +31,6 @@ WP* new_wp() {
 	wp->NO = nr_wp++;
 	if(head == NULL) {
 		head = wp;
-		wp->NO = nr_wp++;
 	}else {
 		WP *pos = head;
 		while(pos->next != NULL) {
