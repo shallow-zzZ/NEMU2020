@@ -82,7 +82,10 @@ static int cmd_x(char *args) {
 		return 0;
 	}
 	int n,addr,i;
-	sscanf(args, "%d %x",&n, &addr);
+	char *exp_str = NULL;
+	sscanf(args, "%d %s",&n, exp_str);
+	bool flag = true;
+	addr = expr(exp_str, &flag);
 	for(i=0;i<n;i++) {
 		printf("addr 0x%x: 0x%x\n", addr, swaddr_read(addr,4));
 		addr+=4;
