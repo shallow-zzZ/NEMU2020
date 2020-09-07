@@ -227,6 +227,7 @@ uint32_t eval(int p, int q){
 				n = cpu.eip;
 			}
 		} else {
+			printf("%d\n",tokens[p].type);
 			assert(0);
 		}
 		return n;
