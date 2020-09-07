@@ -86,9 +86,7 @@ static int cmd_x(char *args) {
 	sscanf(args, "%s",num);
 	sscanf(num, "%d", &n);
 	args += strlen(num)+1;
-	int len = strlen(num);
-	printf("%d\n",len);
-	printf("%s\n",args);
+	assert(args!=NULL);
 	bool flag = true;
 	addr = expr(args, &flag);
 	for(i=0;i<n;i++) {
