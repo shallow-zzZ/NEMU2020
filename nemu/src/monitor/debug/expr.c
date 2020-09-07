@@ -151,8 +151,7 @@ static bool make_token(char *e) {
                                         case(RIGHT): tokens[nr_token].type = RIGHT;
                                         nr_token++;
                                         break;
-                                        case(NOTYPE): tokens[nr_token].type = NOTYPE;
-                                        nr_token++;
+                                        case(NOTYPE):
                                         break;
 					default: panic("please implement me");
 				}
