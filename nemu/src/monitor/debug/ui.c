@@ -114,12 +114,12 @@ static int cmd_w(char *args) {
 	wp = new_wp();
 	strncpy(wp->str,args,strlen(args)+1);
 	bool flag = true;
+	wp->result = expr(args,&flag);
 	if(!flag){
 		printf("Cannot recognise the expression!\n");
 		free_wp(wp);
 		return 0;
 	}
-	wp->result = expr(args,&flag);
 	//printf("0x%x\n",wp->result);
 	return 0;
 }
