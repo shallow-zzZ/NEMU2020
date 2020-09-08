@@ -74,7 +74,7 @@ static int cmd_p(char *args) {
 	bool flag = true;
 	uint32_t result = expr(args, &flag);
 	if(!flag){
-		printf("CANNOT RECONGNISE!\n");
+		printf("Cannot recognise the expression!\n");
 		return 0;
 	}
 	printf("epression: %s  result: 0x%x\n",args,result);
@@ -94,6 +94,10 @@ static int cmd_x(char *args) {
 	assert(args!=NULL);
 	bool flag = true;
 	addr = expr(args, &flag);
+	if(!flag){
+		printf("Cannot recognise the expression!\n");
+		return 0;
+	}
 	for(i=0;i<n;i++) {
 		printf("addr 0x%x: 0x%x\n", addr, swaddr_read(addr,4));
 		addr+=4;
@@ -110,6 +114,11 @@ static int cmd_w(char *args) {
 	wp = new_wp();
 	strncpy(wp->str,args,strlen(args)+1);
 	bool flag = true;
+	if(!flag){
+		printf("Cannot recognise the expression!\n");
+		free_wp(wp);
+		return 0;
+	}
 	wp->result = expr(args,&flag);
 	//printf("0x%x\n",wp->result);
 	return 0;
