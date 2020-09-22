@@ -29,3 +29,4 @@
 #include "special/special.h"
 
 #include "transfer-control/call.h"
+#include "transfer-control/je.h"
