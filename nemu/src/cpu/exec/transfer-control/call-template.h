@@ -10,7 +10,7 @@ make_helper(concat(call_i_,SUFFIX)) {
 		cpu.eip = (cpu.eip + op_src->val) & 0x0000ffff;
 	}else {
 		reg_l(R_ESP) -= 4;
-                swaddr_write(reg_l(R_ESP), 4, cpu.eip);
+                swaddr_write(reg_l(R_ESP), 4, cpu.eip + len);
                 cpu.eip = cpu.eip + op_src->val;
 	}
 	print_asm(str(instr) " %x", cpu.eip + len + 1);
