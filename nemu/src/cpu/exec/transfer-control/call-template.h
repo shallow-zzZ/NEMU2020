@@ -13,7 +13,7 @@ make_helper(concat(call_i_,SUFFIX)) {
                 swaddr_write(reg_l(R_ESP), 4, cpu.eip);
                 cpu.eip = cpu.eip + op_src->val;
 	}
-	print_asm(str(instr) str(SUFFIX) " %x", cpu.eip + len + 1);
+	print_asm(str(instr) " %x", cpu.eip + len + 1);
 	return len+1;
 }
 
