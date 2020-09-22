@@ -90,7 +90,6 @@ make_group(group7,
 	inv, inv, inv, inv, 
 	inv, inv, inv, inv)
 
-
 /* TODO: Add more instructions!!! */
 
 helper_fun opcode_table [256] = {
