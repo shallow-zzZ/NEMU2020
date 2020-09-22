@@ -10,9 +10,10 @@ static void do_execute() {
 		reg_l(R_ESP) -= 4;
 		swaddr_write(reg_l(R_ESP), 4, op_src->val);
 	}
-	print_asm("push %s %x", op_src->str, op_src->val);
+	print_asm("push %s", op_src->str);
 }
 
 make_instr_helper(r)
+make_instr_helper(i)
 
 #include "cpu/exec/template-end.h"
