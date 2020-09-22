@@ -2,17 +2,23 @@
 
 #define instr cmp
 
-static void do_execute() {
-	print_asm("%x %s",op_src->val, op_src2->str);
-	//DATA_TYPE_S res = op_src->val - op_src2->val;
-	//cpu.OF = ;
-	//cpu.SF = ;
-	//cpu.ZF = ;
-	//cpu.AF = ;
-	//cpu.PF = ;
-	//cpu.CF = ;
+#if DATA_BYTE == 4
+
+make_helper(cmp_si2rm_l){
+	int len = decode_si2rm_l(eip+1);
+	print_asm("%s %s",op_src->str, op_src2->str);
+	return len+1;
 }
 
-make_instr_helper(i2rm)
+#endif
 
+#if DATA_BYTE == 2
+
+make_helper(cmp_si2rm_w){
+        int len = decode_si2rm_w(eip+1);
+        print_asm("%s %s",op_src->str, op_src2->str);
+        return len+1;
+}
+
+#endif
 #include "cpu/exec/template-end.h"
