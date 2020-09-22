@@ -3,7 +3,7 @@
 #define instr cmp
 
 static void do_execute() {
-	print_asm("%s %s",op_src->str, op_src2->str);
+	print_asm("%x %s",op_src->val, op_src2->str);
 	//DATA_TYPE_S res = op_src->val - op_src2->val;
 	//cpu.OF = ;
 	//cpu.SF = ;
