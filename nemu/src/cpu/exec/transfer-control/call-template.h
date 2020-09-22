@@ -12,7 +12,7 @@ static void do_execute() {
 		swaddr_write(reg_l(R_ESP), 4, cpu.eip);
 		cpu.eip = cpu.eip + op_src->val;
 	}
-	print_asm_template1();
+	//print_asm_template1();
 }
 
 make_instr_helper(i)
