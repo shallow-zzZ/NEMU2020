@@ -6,7 +6,7 @@
 make_helper(concat(cmp_i2rm_,SUFFIX)){
 	int len = concat(decode_rm_,SUFFIX)(eip+1);
 	int8_t src1 = swaddr_read(eip+ len +1,1);
-	print_asm("$0x%x %s",src1, op_src->str);
+	print_asm(str(instr)" $0x%x %s",src1, op_src->str);
 	DATA_TYPE_S src2 = op_src->val;
 	DATA_TYPE_S res = src2 - src1;
 	if(src2>0 && src1<0 && res<0){
