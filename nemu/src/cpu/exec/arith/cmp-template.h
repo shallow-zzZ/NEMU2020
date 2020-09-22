@@ -2,23 +2,12 @@
 
 #define instr cmp
 
-#if DATA_BYTE == 4
 
-make_helper(cmp_si2rm_l){
-	int len = decode_si2rm_l(eip+1);
-	print_asm("%s %s",op_src->str, op_src2->str);
-	return len+1;
+make_helper(concat(cmp_i2rm_,SUFFIX)){
+	int src1 = swaddr_read(eip,1);
+	int len = concat(decode_rm_,SUFFIX)(eip+2);
+	print_asm("%x %s",src1, op_src->str);
+	return len+2;
 }
 
-#endif
-
-#if DATA_BYTE == 2
-
-make_helper(cmp_si2rm_w){
-        int len = decode_si2rm_w(eip+1);
-        print_asm("%s %s",op_src->str, op_src2->str);
-        return len+1;
-}
-
-#endif
 #include "cpu/exec/template-end.h"
