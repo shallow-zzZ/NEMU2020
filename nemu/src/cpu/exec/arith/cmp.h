@@ -2,5 +2,6 @@
 #define __CMP_H_
 
 make_helper(cmp_i2rm_v);
+make_helper(cmp_i2rm_b);
 
 #endif
