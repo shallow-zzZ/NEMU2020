@@ -28,7 +28,7 @@ make_helper(concat(cmp_i2rm_,SUFFIX)){
 }
 */
 
-#if DATA_BYTE == 2 || DATA_BYTE ==4
+
 static void do_execute(){
 	DATA_TYPE_S src1 = op_dest->val;
 	DATA_TYPE_S src2 = op_src->val;
@@ -51,6 +51,7 @@ static void do_execute(){
 	print_asm(str(instr) " %s %s",op_src->str, op_dest->str);
 }
 
+#if DATA_BYTE == 2 || DATA_BYTE ==4
 make_instr_helper(si2rm)
 #endif
 
