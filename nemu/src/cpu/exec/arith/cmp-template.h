@@ -2,7 +2,7 @@
 
 #define instr cmp
 
-
+/*
 make_helper(concat(cmp_i2rm_,SUFFIX)){
 	int len = concat(decode_rm_,SUFFIX)(eip+1);
 	int8_t src1 = swaddr_read(eip + len +1,1);
@@ -26,12 +26,12 @@ make_helper(concat(cmp_i2rm_,SUFFIX)){
 	cpu.PF = (cnt%2)? 0:1;
 	return len+2;
 }
+*/
 
-/*
 static void do_execute(){
 	print_asm("%s %s",op_src->str, op_dest->str);
 }
 
-make_instr_helper(i2rm)
-*/
+make_instr_helper(si2rm)
+
 #include "cpu/exec/template-end.h"
