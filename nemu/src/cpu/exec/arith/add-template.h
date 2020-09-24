@@ -2,15 +2,14 @@
 
 #define instr add
 
-#if DATA_BYTE == 2 || DATA_BYTE == 4
-
 static void do_execute(){
 	int8_t tmp = op_src->val;
 	DATA_TYPE_S src = (DATA_TYPE_S)tmp;
 	DATA_TYPE_S dest = op_dest->val;
 	DATA_TYPE_S res = dest+src;
-	if(op_dest->type == OP_TYPE_REG) { REG(op_dest->reg) = res; }
-	else if(op_dest->type == OP_TYPE_MEM) { swaddr_write(op_dest->addr, DATA_BYTE, res); }
+	OPERAND_W(op_dest, (DATA_TYPE)res);
+	//if(op_dest->type == OP_TYPE_REG) { REG(op_dest->reg) = res; }
+	//else if(op_dest->type == OP_TYPE_MEM) { swaddr_write(op_dest->addr, DATA_BYTE, res); }
 	// flags
 	if(src>0 && dest>0 && res<0){
 		cpu.OF = 1;
@@ -30,8 +29,9 @@ static void do_execute(){
 	print_asm_template2();
 }
 
+#if DATA_BYTE == 2 || DATA_BYTE == 4
 make_instr_helper(si2rm)
-
 #endif
+make_instr_helper(r2rm)
 
 #include "cpu/exec/template-end.h"
