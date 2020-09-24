@@ -8,6 +8,7 @@ make_helper(setne) {
 	} else {
 		reg_b(op_src->reg) = 0;
 	}
+	print_asm("set %s", op_src->str);
 	return len+1;
 }
 #endif
