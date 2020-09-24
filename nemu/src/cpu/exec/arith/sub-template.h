@@ -9,8 +9,9 @@ static void do_execute(){
 	DATA_TYPE_S src = (DATA_TYPE_S)tmp;
 	DATA_TYPE_S dest = op_dest->val;
 	DATA_TYPE_S res = dest-src;
-	if(op_dest->type == OP_TYPE_REG) { REG(op_dest->reg) = res; }
-	else if(op_dest->type == OP_TYPE_MEM) { swaddr_write(op_dest->addr, DATA_BYTE, res); }
+	OPERAND_W(op_dest, (DATA_TYPE)res);
+	//if(op_dest->type == OP_TYPE_REG) { REG(op_dest->reg) = res; }
+	//else if(op_dest->type == OP_TYPE_MEM) { swaddr_write(op_dest->addr, DATA_BYTE, res); }
 	// flags
 	if(src<0 && dest>0 && res<0){
 		cpu.OF = 1;
