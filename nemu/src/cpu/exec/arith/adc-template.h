@@ -3,7 +3,9 @@
 #define instr adc
 
 static void do_execute(){
-	DATA_TYPE res = op_dest->val + op_src->val + cpu.CF;
+	DATA_TYPE_S src = op_src->val;
+	DATA_TYPE_S dest = op_dest->val;
+	DATA_TYPE_S res = dest + src + cpu.CF;
 	OPERAND_W(op_dest, (DATA_TYPE)res);
 	print_asm_template2();
 }
