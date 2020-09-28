@@ -1,10 +1,10 @@
 #include "cpu/exec/template-start.h"
 
-#define instr jne
+#define instr jle
 
-make_helper(concat(jne_i_,SUFFIX)){
+make_helper(concat(jle_i_,SUFFIX)){
 	int len = concat(decode_i_,SUFFIX)(eip+1);
-	if(!cpu.ZF){
+	if(cpu.ZF || cpu.ZF!=cpu.OF){
 		cpu.eip += op_src->val;
 		if(DATA_BYTE == 2) cpu.eip = cpu.eip & 0x0000ffff;
 	}
