@@ -2,9 +2,9 @@
 
 #define instr je
 
-make_helper(concat(je_i_,SUFFIX)){
+make_helper(concat(jne_i_,SUFFIX)){
 	int len = concat(decode_i_,SUFFIX)(eip+1);
-	if(cpu.ZF){
+	if(!cpu.ZF){
 		cpu.eip += op_src->val;
 		if(DATA_BYTE == 2) cpu.eip = cpu.eip & 0x0000ffff;
 	}
