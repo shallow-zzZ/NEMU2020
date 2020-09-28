@@ -19,7 +19,7 @@ long long ans[] = {0LL,0x2LL,0x4LL};//, 0x1LL, 0x2LL, 0x7fffffffffffffffLL, 0x80
 
 int main() {
 	int i;//, ans_idx = 0;
-	int loop = 0;
+	//int loop = 0;
 	for(i = 0; i < NR_DATA; i ++) {
 		//for(j = 0; j < NR_DATA; j ++) {
 			nemu_assert(add(test_data[i], test_data[i]) == ans[i]);
@@ -27,9 +27,9 @@ int main() {
 			set_bp();
 		//}
 	}
-	nemu_assert(loop == NR_DATA * NR_DATA);
+	//nemu_assert(loop == NR_DATA * NR_DATA);
 	//nemu_assert(add(test_data[1], test_data[1]) == ans[3]);
 
-	nemu_assert(add(test_data[0], test_data[0]) == ans[0]);
+	//nemu_assert(add(test_data[0], test_data[0]) == ans[0]);
 	return 0;
 }
