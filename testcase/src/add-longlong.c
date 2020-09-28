@@ -28,7 +28,7 @@ int main() {
 		//}
 	}*/
 	//nemu_assert(loop == NR_DATA * NR_DATA);
-	nemu_assert(add(test_data[1], test_data[1]) == ans[1]);
+	nemu_assert(add(test_data[2], test_data[2]) == ans[2]);
 
 	//nemu_assert(add(test_data[0], test_data[0]) == ans[0]);
 	return 0;
