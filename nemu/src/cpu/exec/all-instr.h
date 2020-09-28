@@ -37,6 +37,7 @@
 
 #include "transfer-control/call.h"
 #include "transfer-control/je.h"
+#include "transfer-control/jne.h"
 #include "transfer-control/ret.h"
 #include "transfer-control/jmp.h"
 #include "transfer-control/jbe.h"
