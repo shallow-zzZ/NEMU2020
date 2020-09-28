@@ -17,7 +17,7 @@ static void do_execute(){
 		cpu.OF = 0;
 	}
 	cpu.SF = (res<0)? 1:0;
-	cpu.ZF = (!res)? 1:0;
+	cpu.ZF = !res;
 	cpu.CF = (op_src->val > ures)? 1:0;
 	int i = 0, cnt = 0;
 	for(i=0;i<8;i++){
