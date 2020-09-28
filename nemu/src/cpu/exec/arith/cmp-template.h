@@ -3,7 +3,7 @@
 #define instr cmp
 
 
-#if DATA_BYTE == 2 || DATA_BYTE ==4
+
 static void do_execute(){
 	DATA_TYPE_S src1 = op_dest->val;
 	DATA_TYPE_S src2 = op_src->val;
@@ -26,6 +26,11 @@ static void do_execute(){
 	print_asm(str(instr) " %s %s %x",op_src->str, op_dest->str, op_dest->val);
 }
 
+#if DATA_BYTE == 1
+make_instr_helper(i2a)
+#endif
+
+#if DATA_BYTE == 2 || DATA_BYTE ==4
 make_instr_helper(si2rm)
 make_instr_helper(r2rm)
 #endif
