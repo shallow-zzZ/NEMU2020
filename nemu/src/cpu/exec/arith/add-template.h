@@ -24,8 +24,8 @@ static void do_execute() {
 		if(res & (1<<i)) cnt++;
 	}
 	cpu.PF = (cnt%2)? 0:1;
-	print_asm_template2();
-	print_asm("add %x",ures);
+	//print_asm_template2();
+	print_asm("add %s %x",op_dest->str, ures);
 }
 
 #if DATA_BYTE == 2 || DATA_BYTE == 4
