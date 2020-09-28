@@ -18,11 +18,11 @@ int ans[] = {0,2,4};
 #define NR_DATA (sizeof(test_data) / sizeof(test_data[0]))
 
 int main() {
-	int i, ans_idx = 0;
+	int i;//, ans_idx = 0;
 	int loop = 0;
 	for(i = 0; i < NR_DATA; i ++) {
 		//for(j = 0; j < NR_DATA; j ++) {
-			nemu_assert(add(test_data[i], test_data[i]) == ans[ans_idx ++]);
+			nemu_assert(add(test_data[i], test_data[i]) == ans[i]);
 		//	loop ++;
 			set_bp();
 		//}
