@@ -6,9 +6,9 @@ static void do_execute(){
 	DATA_TYPE_S src1 = op_dest->val;
 	DATA_TYPE_S src2 = op_src->val;
 	DATA_TYPE_S res = src1 - src2;
-	if(src1>0 && src2<0 && res<0){
+	if(src1>0 && src2<0 && res<=0){
 		cpu.OF = 1;
-	}else if(src1<0 && src2>0 && res>0){
+	}else if(src1<0 && src2>0 && res>=0){
 		cpu.OF = 1;
 	}else {
 		cpu.OF = 0;
@@ -35,11 +35,6 @@ make_instr_helper(si2rm)
 make_instr_helper(r2rm)
 make_instr_helper(i2rm)
 make_instr_helper(rm2r)
-/*
-#if DATA_BYTE == 1
 
-make_instr_helper(i2rm)
-#endif
-*/
 
 #include "cpu/exec/template-end.h"
