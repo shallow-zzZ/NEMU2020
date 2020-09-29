@@ -5,13 +5,13 @@
 #if DATA_BYTE == 2 || DATA_BYTE == 4
 
 static void do_execute(){
-	DATA_TYPE_S src1 = op_dest->val;
-	DATA_TYPE_S src2 = op_src->val;
-	DATA_TYPE_S res = src1 - src2;
+	DATA_TYPE_S dest = op_dest->val;
+	DATA_TYPE_S src = op_src->val;
+	DATA_TYPE_S res = dest - src;
 	OPERAND_W(op_dest, (DATA_TYPE)res);
-	if(src1>0 && src2<0 && res<0){
+	if(dest>0 && src<0 && res<0){
 		cpu.OF = 1;
-	}else if(src1<0 && src2>0 && res>0){
+	}else if(dest<0 && src>0 && res>0){
 		cpu.OF = 1;
 	}else {
 		cpu.OF = 0;
