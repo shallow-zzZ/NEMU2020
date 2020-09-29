@@ -26,7 +26,11 @@ make_helper(rep) {
 				);
 
 			/* TODO: Jump out of the while loop if necessary. */
-
+			if((ops_decoded.opcode == 0xa6	// cmpsb
+			|| ops_decoded.opcode == 0xa7	// cmpsw
+			|| ops_decoded.opcode == 0xae	// scasb
+			|| ops_decoded.opcode == 0xaf	// scasw
+			)&&cpu.ZF==0) break;
 		}
 		len = 1;
 	}
@@ -53,7 +57,11 @@ make_helper(repnz) {
 			  );
 
 		/* TODO: Jump out of the while loop if necessary. */
-
+		if((ops_decoded.opcode == 0xa6	// cmpsb
+		|| ops_decoded.opcode == 0xa7	// cmpsw
+		|| ops_decoded.opcode == 0xae	// scasb
+		|| ops_decoded.opcode == 0xaf	// scasw
+		)&&cpu.ZF) break;
 	}
 
 #ifdef DEBUG
