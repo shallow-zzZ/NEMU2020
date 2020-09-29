@@ -19,7 +19,7 @@ int main() {
 		for(j = 0; j < NR_DATA; j ++) {
 			nemu_assert(max(test_data[i], test_data[j]) == ans[ans_idx ++]);
 			//loop ++;
-			//set_bp();
+			set_bp();
 		}
 	}
 	//nemu_assert(max(test_data[0], test_data[0]) == ans[0]);
