@@ -22,7 +22,7 @@ int main() {
 			set_bp();
 		}
 	}*/
-	nemu_assert(max(test_data[7], test_data[7]) == 0xffffffff);
+	nemu_assert(max(test_data[7], test_data[7]) == ans[63]);
 	nemu_assert(loop == NR_DATA * NR_DATA);
 
 	return 0;
