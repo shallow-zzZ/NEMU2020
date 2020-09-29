@@ -51,3 +51,4 @@
 #include "transfer-control/set.h"
 #include "transfer-control/js.h"
 #include "transfer-control/jns.h"
+#include "transfer-control/ja.h"
