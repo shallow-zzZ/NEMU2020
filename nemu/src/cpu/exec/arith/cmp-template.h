@@ -2,8 +2,6 @@
 
 #define instr cmp
 
-
-
 static void do_execute(){
 	DATA_TYPE_S src1 = op_dest->val;
 	DATA_TYPE_S src2 = op_src->val;
@@ -23,7 +21,7 @@ static void do_execute(){
 		if(res & (1<<i)) cnt++;
 	}
 	cpu.PF = (cnt%2)? 0:1;
-	print_asm(str(instr) " %s %s %d %d %x",op_src->str, op_dest->str, op_src->type, op_dest->type,res);
+	print_asm(str(instr) " %s %s %x %x %x",op_src->str, op_dest->str, op_src->val, op_dest->val,res);
 }
 
 #if DATA_BYTE == 1
