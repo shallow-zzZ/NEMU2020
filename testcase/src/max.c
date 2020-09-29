@@ -14,7 +14,7 @@ int ans[] = {0};//, 0x1, 0x2, 0x7fffffff, 0, 0, 0, 0, 0x1, 0x1, 0x2, 0x7fffffff,
 
 int main() {
 	//int i, j, ans_idx = 0;
-	int loop = 0;
+	int loop = 1;
 	/*for(i = 0; i < NR_DATA; i ++) {
 		for(j = 0; j < NR_DATA; j ++) {
 			nemu_assert(max(test_data[i], test_data[j]) == ans[ans_idx ++]);
