@@ -42,6 +42,7 @@
 #include "transfer-control/je.h"
 #include "transfer-control/jne.h"
 #include "transfer-control/jle.h"
+#include "transfer-control/jge.h"
 #include "transfer-control/jg.h"
 #include "transfer-control/jl.h"
 #include "transfer-control/ret.h"
