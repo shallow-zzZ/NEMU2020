@@ -48,3 +48,4 @@
 #include "transfer-control/jmp.h"
 #include "transfer-control/jbe.h"
 #include "transfer-control/set.h"
+#include "transfer-control/js.h"
