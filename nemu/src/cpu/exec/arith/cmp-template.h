@@ -6,7 +6,7 @@ static void do_execute(){
 	DATA_TYPE_S src1 = op_dest->val;
 	DATA_TYPE_S src2 = op_src->val;
 	DATA_TYPE_S res = src1 - src2;
-	if(src1>0 && src2<0 && res<=0){
+	if(src1>=0 && src2<0 && res<=0){
 		cpu.OF = 1;
 	}else if(src1<0 && src2>0 && res>=0){
 		cpu.OF = 1;
