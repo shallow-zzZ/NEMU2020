@@ -15,8 +15,8 @@ int ans[] = {0, 0x1, 0x2, 0x7fffffff, 0, 0, 0, 0, 0x1, 0x1, 0x2, 0x7fffffff, 0x1
 int main() {
 	int i, j, ans_idx = 0;
 	//int loop = 1;
-	for(i = 0; i < 8; i ++) {
-		for(j = 0; j < 8; j ++) {
+	for(i = 0; i < 3; i ++) {
+		for(j = 0; j < 3; j ++) {
 			nemu_assert(max(test_data[i], test_data[j]) == ans[ans_idx ++]);
 			//loop ++;
 			//set_bp();
