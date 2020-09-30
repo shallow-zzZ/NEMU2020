@@ -7,7 +7,7 @@ make_helper(concat(ret_,SUFFIX)){
 	cpu.eip = num;
 	if(DATA_BYTE == 2) cpu.eip = cpu.eip & 0x0000ffff;
 	reg_l(R_ESP) += DATA_BYTE;
-	print_asm(str(instr));
+	print_asm(str(instr) str(SUFFIX));
 	return 1;
 }
 
