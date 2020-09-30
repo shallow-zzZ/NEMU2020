@@ -10,7 +10,7 @@ make_helper(concat(lods_,SUFFIX)){
 	} else {
                 cpu.esi -= DATA_BYTE;
 	}
-	print_asm(str(instr) str(SUFFIX));
+	print_asm(str(instr) str(SUFFIX)" %x", src);
 	return 1;
 }
 

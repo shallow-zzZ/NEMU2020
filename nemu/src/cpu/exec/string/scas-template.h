@@ -26,7 +26,7 @@ make_helper(concat(scas_,SUFFIX)){
 	} else {
                 cpu.edi -= DATA_BYTE;
 	}
-	print_asm(str(instr) str(SUFFIX));
+	print_asm(str(instr) str(SUFFIX) " %x %x",dest, src);
 	return 1;
 }
 
