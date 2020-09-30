@@ -18,7 +18,7 @@ make_helper(concat(ret_i_,SUFFIX)){
 	cpu.eip = num;
 	reg_l(R_ESP) += DATA_BYTE;
 	//cpu.esp += 4;
-	//print_asm_template();
+	print_asm(str(instr));
 	return 1;
 }
 #endif
