@@ -11,8 +11,8 @@ make_helper(concat(ret_,SUFFIX)){
 	return 1;
 }
 
-#if DATA_BYTE == 2
-make_helper(ret_i_w){
+
+make_helper(concat(ret_i_,SUFFIX)){
 	/*//int len = concat(decode_i_,w)(eip+1);
 	DATA_TYPE num = swaddr_read(reg_l(R_ESP),DATA_BYTE);
 	cpu.eip = num;
@@ -27,6 +27,6 @@ make_helper(ret_i_w){
 	print_asm(str(instr));
 	return 1;
 }
-#endif
+
 
 #include "cpu/exec/template-end.h"
