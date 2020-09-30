@@ -17,7 +17,7 @@ make_helper(concat(ret_i_,SUFFIX)){
 	DATA_TYPE num = swaddr_read(reg_l(R_ESP),DATA_BYTE);
 	cpu.eip = num;
 	reg_l(R_ESP) += DATA_BYTE;
-	//cpu.esp += op_src->val;
+	cpu.esp += 4;
 	//print_asm_template();
 	return 1;
 }
