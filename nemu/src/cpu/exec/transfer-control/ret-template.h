@@ -13,14 +13,13 @@ make_helper(concat(ret_,SUFFIX)){
 
 #if DATA_BYTE == 2
 make_helper(concat(ret_i_,SUFFIX)){
-	int len = concat(decode_i_,w)(eip+1);
+	//int len = concat(decode_i_,w)(eip+1);
 	DATA_TYPE num = swaddr_read(reg_l(R_ESP),DATA_BYTE);
 	cpu.eip = num;
-	print_asm("num %x", num);
 	reg_l(R_ESP) += DATA_BYTE;
-	cpu.esp += op_src->val;
-	//print_asm_template1();
-	return len+1;
+	//cpu.esp += op_src->val;
+	//print_asm_template();
+	return 1;
 }
 #endif
 
