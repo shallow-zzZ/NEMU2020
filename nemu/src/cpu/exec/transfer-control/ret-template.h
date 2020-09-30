@@ -16,9 +16,10 @@ make_helper(concat(ret_i_,SUFFIX)){
 	int len = concat(decode_i_,w)(eip+1);
 	DATA_TYPE num = swaddr_read(reg_l(R_ESP),DATA_BYTE);
 	cpu.eip = num & 0x0000ffff;
+	print_asm("eip %x", cpu.eip);
 	reg_l(R_ESP) += DATA_BYTE;
 	cpu.esp += op_src->val;
-	print_asm_template1();
+	//print_asm_template1();
 	return len+1;
 }
 #endif
