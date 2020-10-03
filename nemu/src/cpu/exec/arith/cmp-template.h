@@ -24,10 +24,6 @@ static void do_execute(){
 	print_asm(str(instr) " %s %s %x %x %x",op_src->str, op_dest->str, op_src->val, op_dest->val,res);
 }
 
-#if DATA_BYTE == 1
-make_instr_helper(i2a)
-#endif
-
 #if DATA_BYTE == 2 || DATA_BYTE ==4
 make_instr_helper(si2rm)
 #endif
@@ -35,6 +31,7 @@ make_instr_helper(si2rm)
 make_instr_helper(r2rm)
 make_instr_helper(i2rm)
 make_instr_helper(rm2r)
+make_instr_helper(i2a)
 
 
 #include "cpu/exec/template-end.h"
