@@ -11,7 +11,8 @@ long long ans[] = {0LL, 0x1LL, 0x2LL, 0x7fffffffffffffffLL, 0x8000000000000000LL
 #define NR_DATA (sizeof(test_data) / sizeof(test_data[0]))
 
 int main() {
-	//int i=0,j, ans_idx = 0;
+	int i=0;//,j, ans_idx = 0;
+	i++;
 	//int loop = 0;
 	/*for(i = 0; i < 5; i ++) {
 		for(j = 0; j < NR_DATA; j ++) {
