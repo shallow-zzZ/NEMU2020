@@ -2,7 +2,7 @@
 
 #define instr sub
 
-#if DATA_BYTE == 2 || DATA_BYTE == 4
+
 
 static void do_execute(){
 	DATA_TYPE_S dest = op_dest->val;
@@ -26,12 +26,13 @@ static void do_execute(){
 	cpu.PF = (cnt%2)? 0:1;
 	print_asm(str(instr) " %s %s",op_src->str, op_dest->str);
 }
-
+#if DATA_BYTE == 2 || DATA_BYTE == 4
 make_instr_helper(si2rm)
+#endif
 make_instr_helper(rm2r)
 make_instr_helper(r2rm)
 make_instr_helper(i2rm)
 
-#endif
+
 
 #include "cpu/exec/template-end.h"
