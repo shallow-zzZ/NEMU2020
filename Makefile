@@ -60,7 +60,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/min3
+USERPROG := obj/testcase/hello-str
 ENTRY := $(kernel_BIN)
 
 entry: $(ENTRY)
