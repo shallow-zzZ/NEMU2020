@@ -2,6 +2,8 @@
 
 .PHONY: nemu entry testcase kernel run gdb test submit clean
 
+
+
 CC := gcc
 LD := ld
 CFLAGS := -MMD -Wall -Werror -c
@@ -17,14 +19,16 @@ include config/Makefile.build
 
 all: nemu
 
-
-##### rules for building the project #####
-
 include nemu/Makefile.part
 include testcase/Makefile.part
 include lib-common/FLOAT/Makefile.part
 include kernel/Makefile.part
 include game/Makefile.part
+
+
+##### rules for building the project #####
+
+
 
 nemu: $(nemu_BIN)
 testcase: $(testcase_BIN)
@@ -33,6 +37,9 @@ game: $(game_BIN)
 
 
 ##### rules for cleaning the project #####
+
+count:
+	find ./ -name "*.c" -o -name "*.h" |xargs cat|wc -l
 
 clean-nemu:
 	-rm -rf obj/nemu 2> /dev/null
