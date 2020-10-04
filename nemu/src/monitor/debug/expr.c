@@ -87,7 +87,7 @@ static bool make_token(char *e) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 
-				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
+				//Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -208,10 +208,9 @@ bool check_parentheses(int p, int q) {
 
 uint32_t eval(int p, int q){
 	if(p>q){  // bad expression
-		//printf("p q %d %d\n", p, q);
 		return 0;
 	}else if(p==q){
-		int n=1;
+		int n=0;
 		if(tokens[p].type == HEX) {
 			sscanf(tokens[p].str,"%x",&n);
 		} else if (tokens[p].type == DEC) {
