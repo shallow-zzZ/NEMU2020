@@ -12,7 +12,8 @@ enum {
 	PLUS, MINUS, MUL, DIV,
 	NOT, STAR, NEG,
 	LEFT, RIGHT, 
-	HEX, DEC, REG
+	HEX, DEC, REG,
+	VAR
 	// HEX > DEC 
 	/* TODO: Add more token types */
 
@@ -41,7 +42,8 @@ static struct rule {
 	{"!", NOT},                                     // not
 	{"0[xX][0-9a-fA-F]+", HEX},                     // hex
 	{"[0-9]+", DEC},                                // dec
-	{"\\$[a-zA-Z]{2,3}", REG}                       // register
+	{"\\$[a-zA-Z]{2,3}", REG},                      // register
+	{"[a-zA-Z][A-Za-z0-9_]*", VAR}			// var
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -87,7 +89,7 @@ static bool make_token(char *e) {
 				char *substr_start = e + position;
 				int substr_len = pmatch.rm_eo;
 
-				//Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
+				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -143,6 +145,10 @@ static bool make_token(char *e) {
                                         break;
                                         case(REG): tokens[nr_token].type = REG;
 					strncpy(tokens[nr_token].str, substr_start, substr_len);
+                                        nr_token++;
+                                        break;
+					case(VAR): tokens[nr_token].type = VAR;
+					strncpy(tokens[nr_token].str, substr_start, substr_len+1);
                                         nr_token++;
                                         break;
                                         case(LEFT): tokens[nr_token].type = LEFT;
