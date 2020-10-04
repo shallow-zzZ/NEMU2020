@@ -136,19 +136,38 @@ static bool make_token(char *e) {
                                         nr_token++;
                                         break;
                                         case(HEX): tokens[nr_token].type = HEX;
-					strncpy(tokens[nr_token].str, substr_start, (substr_len>32)?32:substr_len);
+					if(substr_len>=32){
+						strncpy(tokens[nr_token].str, substr_start, 32);
+						tokens[nr_token].str[31] = '\0';
+					}else {
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len] = '\0';
+					}
                                         nr_token++;
                                         break;
                                         case(DEC): tokens[nr_token].type = DEC;
-					strncpy(tokens[nr_token].str, substr_start, (substr_len>32)?32:substr_len);
+					if(substr_len>=32){
+						strncpy(tokens[nr_token].str, substr_start, 32);
+						tokens[nr_token].str[31] = '\0';
+					}else {
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len] = '\0';
+					}
                                         nr_token++;
                                         break;
                                         case(REG): tokens[nr_token].type = REG;
 					strncpy(tokens[nr_token].str, substr_start, substr_len);
+					tokens[nr_token].str[substr_len] = '\0';
                                         nr_token++;
                                         break;
 					case(VAR): tokens[nr_token].type = VAR;
-					strncpy(tokens[nr_token].str, substr_start, (substr_len>32)?32:substr_len);
+					if(substr_len>=32){
+						strncpy(tokens[nr_token].str, substr_start, 32);
+						tokens[nr_token].str[31] = '\0';
+					}else {
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len] = '\0';
+					}
                                         nr_token++;
                                         break;
                                         case(LEFT): tokens[nr_token].type = LEFT;
