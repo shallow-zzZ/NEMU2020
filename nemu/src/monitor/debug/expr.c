@@ -266,9 +266,9 @@ uint32_t eval(int p, int q, bool *success){
 		int op = find_dominant(p,q);
 		Assert(op!=-1,"Invalid expression!\n");
 		int val1 = (int)(eval(p,op-1,success));
-		if(!(*success))return *success = false;
+		if(!(*success)) return *success = false;
 		int val2 = (int)(eval(op+1,q,success));
-		if(!(*success))return *success = false;
+		if(!(*success)) return *success = false;
 		switch(tokens[op].type){
 			case(PLUS): return val1+val2;
 			case(MINUS): return val1-val2;
