@@ -75,6 +75,8 @@ typedef struct token {
 Token tokens[32];
 int nr_token;
 
+uint32_t getVar(char *var, bool *success);
+
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
@@ -231,41 +233,42 @@ bool check_parentheses(int p, int q) {
 	return false;
 }
 
-uint32_t eval(int p, int q){
+uint32_t eval(int p, int q, bool *success){
+	*success = true;
 	if(p>q){  // bad expression
-		return 0;
+		return *success = false;
 	}else if(p==q){
-		int n=0;
+		int n = 0;
 		printf("%s\n",tokens[p].str);
 		if(tokens[p].type == HEX) {
 			sscanf(tokens[p].str,"%x",&n);
+			return n;
 		} else if (tokens[p].type == DEC) {
 			sscanf(tokens[p].str,"%d",&n);
+			return n;
 		} else if (tokens[p].type == REG) {
 			int i;
 			for(i=0;i<8;i++){
-				if(!strcasecmp(tokens[p].str+1,regsl[i])) n = reg_l(i);
-				if(!strcasecmp(tokens[p].str+1,regsw[i])) n = reg_w(i);
-				if(!strcasecmp(tokens[p].str+1,regsb[i])) n = reg_b(i);
+				if(!strcasecmp(tokens[p].str+1,regsl[i])) return reg_l(i);
+				if(!strcasecmp(tokens[p].str+1,regsw[i])) return reg_w(i);
+				if(!strcasecmp(tokens[p].str+1,regsb[i])) return reg_b(i);
 			}
 			if(!strcasecmp(tokens[p].str,"$eip")){
-				n = cpu.eip;
+				return cpu.eip;
 			}
 		} else if (tokens[p].type == VAR) {
-			//return getVar(tokens[p].str);
-			n = 0;
-		} else {
-			printf("%d\n",tokens[p].type);
-			assert(0);
+			return getVar(tokens[p].str,success);
 		}
-		return n;
+		return *success = false;
 	}else if(check_parentheses(p,q)==true){
-		return eval(p+1,q-1);
+		return eval(p+1,q-1,success);
 	}else{
 		int op = find_dominant(p,q);
 		Assert(op!=-1,"Invalid expression!\n");
-		int val1 = (int)(eval(p,op-1));
-		int val2 = (int)(eval(op+1,q));
+		int val1 = (int)(eval(p,op-1,success));
+		if(!(*success))return *success = false;
+		int val2 = (int)(eval(op+1,q,success));
+		if(!(*success))return *success = false;
 		switch(tokens[op].type){
 			case(PLUS): return val1+val2;
 			case(MINUS): return val1-val2;
@@ -289,6 +292,6 @@ uint32_t expr(char *e, bool *success) {
 		return 0;
 	}
 	/* TODO: Insert codes to evaluate the expression. */
-	return eval(0,nr_token-1);
+	return eval(0,nr_token-1,success);
 }
 
