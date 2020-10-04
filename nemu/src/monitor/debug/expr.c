@@ -211,7 +211,7 @@ uint32_t eval(int p, int q){
 		//printf("p q %d %d\n", p, q);
 		return 0;
 	}else if(p==q){
-		int n;
+		int n=1;
 		if(tokens[p].type == HEX) {
 			sscanf(tokens[p].str,"%x",&n);
 		} else if (tokens[p].type == DEC) {
