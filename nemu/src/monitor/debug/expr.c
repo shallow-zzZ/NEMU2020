@@ -251,6 +251,9 @@ uint32_t eval(int p, int q){
 			if(!strcasecmp(tokens[p].str,"$eip")){
 				n = cpu.eip;
 			}
+		} else if (tokens[p].type == VAR) {
+			printf("wait\n");
+			n = 0;
 		} else {
 			printf("%d\n",tokens[p].type);
 			assert(0);
