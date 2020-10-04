@@ -217,6 +217,7 @@ uint32_t eval(int p, int q){
 		return 0;
 	}else if(p==q){
 		int n=0;
+		printf("%s\n",tokens[p].str);
 		if(tokens[p].type == HEX) {
 			sscanf(tokens[p].str,"%x",&n);
 		} else if (tokens[p].type == DEC) {
@@ -243,7 +244,6 @@ uint32_t eval(int p, int q){
 		Assert(op!=-1,"Invalid expression!\n");
 		int val1 = (int)(eval(p,op-1));
 		int val2 = (int)(eval(op+1,q));
-		printf("%d %d\n", val1, val2);
 		switch(tokens[op].type){
 			case(PLUS): return val1+val2;
 			case(MINUS): return val1-val2;
