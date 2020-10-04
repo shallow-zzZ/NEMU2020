@@ -142,7 +142,7 @@ static int cmd_bt(char *args) {
 	swaddr_t now_ebp = reg_l(R_EBP);
 	swaddr_t now_ret = cpu.eip;
 	int cnt = 0, i;
-	char name[50];
+	char name[32];
 	while(now_ebp) {
 		getFunName(now_ret, name);
 		if(name[0] == '\0') break;

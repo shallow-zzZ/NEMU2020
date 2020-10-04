@@ -103,5 +103,5 @@ void getFunName(swaddr_t addr, char *s) {
 			return ;
 		}
 	}
-	s[0] = '\0';
+	s[0] = '\0'; //NULL
 }
