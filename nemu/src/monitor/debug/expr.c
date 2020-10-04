@@ -252,7 +252,7 @@ uint32_t eval(int p, int q){
 				n = cpu.eip;
 			}
 		} else if (tokens[p].type == VAR) {
-			printf("wait\n");
+			//return getVar(tokens[p].str);
 			n = 0;
 		} else {
 			printf("%d\n",tokens[p].type);

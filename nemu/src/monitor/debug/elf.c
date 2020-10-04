@@ -81,3 +81,16 @@ void load_elf_tables(int argc, char *argv[]) {
 	fclose(fp);
 }
 
+uint32_t getVar(char *var, bool *success) {
+	*success = true;
+	int i;
+	for(i = 0; i < nr_symtab_entry; i++) {
+		if ((symtab[i].st_info & 0xf) == STT_OBJECT) {
+			char name[32];
+			strcpy(name, strtab + symtab[i].st_name);
+			if (strcmp(name, var) == 0) return symtab[i].st_value;
+		}
+	}
+	*success = false;
+	return 0;
+}
