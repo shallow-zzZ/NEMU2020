@@ -237,6 +237,7 @@ uint32_t eval(int p, int q){
 		Assert(op!=-1,"Invalid expression!\n");
 		int val1 = (int)(eval(p,op-1));
 		int val2 = (int)(eval(op+1,q));
+		printf("%d %d\n", val1, val2);
 		switch(tokens[op].type){
 			case(PLUS): return val1+val2;
 			case(MINUS): return val1-val2;
