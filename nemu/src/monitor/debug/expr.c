@@ -216,7 +216,6 @@ uint32_t eval(int p, int q){
 		} else if (tokens[p].type == DEC) {
 			sscanf(tokens[p].str,"%d",&n);
 		} else if (tokens[p].type == REG) {
-			printf("%s\n", tokens[p].str);
 			int i;
 			for(i=0;i<8;i++){
 				if(!strcasecmp(tokens[p].str+1,regsl[i])) n = reg_l(i);
