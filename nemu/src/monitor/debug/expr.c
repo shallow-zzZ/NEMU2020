@@ -209,7 +209,7 @@ bool check_parentheses(int p, int q) {
 uint32_t eval(int p, int q){
 	if(p>q){  // bad expression
 		printf("p q %d %d\n", p, q);
-		return 0;
+		return 1;
 	}else if(p==q){
 		int n;
 		if(tokens[p].type == HEX) {
