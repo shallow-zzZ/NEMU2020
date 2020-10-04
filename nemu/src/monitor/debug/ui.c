@@ -146,8 +146,8 @@ static int cmd_bt(char *args) {
 	while(now_ebp) {
 		getFunName(now_ret, name);
 		if(name[0] == '\0') break;
-		printf("#%d 0x%x: ", ++cnt, now_ret);
-		printf("%s", name);
+		printf("%d 0x%x: ", ++cnt, now_ret);
+		printf("%s ", name);
 		for(i = 0; i < 4; i++) {
 			printf("%d", swaddr_read(now_ebp + 8 + i * 4, 4));
 			if(i==3) printf("\n");
