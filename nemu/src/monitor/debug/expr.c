@@ -136,7 +136,7 @@ static bool make_token(char *e) {
                                         nr_token++;
                                         break;
                                         case(HEX): tokens[nr_token].type = HEX;
-					strncpy(tokens[nr_token].str, substr_start, ((substr_len>31)?31:substr_len) + 1);
+					strncpy(tokens[nr_token].str, substr_start, ((substr_len>31)?31:substr_len));
                                         nr_token++;
                                         break;
                                         case(DEC): tokens[nr_token].type = DEC;
