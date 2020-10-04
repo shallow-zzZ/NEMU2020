@@ -94,3 +94,14 @@ uint32_t getVar(char *var, bool *success) {
 	*success = false;
 	return 0;
 }
+
+void getFunName(swaddr_t addr, char *s) {
+	int i = 0;
+	for (i = 0; i < nr_symtab_entry; i++) {
+		if ((symtab[i].st_info & 0xf) == STT_FUNC && symtab[i].st_value <= addr && symtab[i].st_value +  symtab[i].st_size >= addr) {
+			strcpy(s, strtab + symtab[i].st_name);
+			return ;
+		}
+	}
+	s[0] = '\0';
+}
