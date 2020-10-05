@@ -17,9 +17,15 @@ __attribute__((used)) static int format_FLOAT(FILE *stream, FLOAT f) {
 	 */
 
 	char buf[80];
+	int sign = f & (1<<31);
 	int tmp = f & 0x0000ffff;
 	int res = (1LL * tmp * 1000000LL) >> 16;	
-	int len = sprintf(buf, "0x%d.%06d", ((int)(f) >> 16), res);
+	int len;
+	if(sign){
+		len = sprintf(buf, "-%d.%06d", ((int)(f) >> 16), res);
+	} else {
+		len = sprintf(buf, "%d.%06d", ((int)(f) >> 16), res);
+	}
 	return __stdio_fwrite(buf, len, stream);
 }
 
@@ -37,8 +43,8 @@ static void modify_vfprintf() {
 	
 	int *pos = (int *)(addr);
 	*pos += (int)format_FLOAT - (int)(&_fpmaxtostr);
-	int  *f2p = (int *)(addr - 0xc);
-	*f2p = 0x08ff3290;
+	int *f2p = (int *)(addr - 0xc);
+	* f2p = 0x9032ff08;
 	short *fl = (short *)(addr - 0x23);
 	*fl = 0x9090;
 	fl = (short *)(addr - 0x1f);
