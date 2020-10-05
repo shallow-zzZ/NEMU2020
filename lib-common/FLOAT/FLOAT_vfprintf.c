@@ -18,6 +18,7 @@ __attribute__((used)) static int format_FLOAT(FILE *stream, FLOAT f) {
 
 	char buf[80];
 	int sign = f & (1<<31);
+	if(sign) f = f & 0x7fffffff;
 	int tmp = f & 0x0000ffff;
 	int res = (1LL * tmp * 1000000LL) >> 16;	
 	int len;
