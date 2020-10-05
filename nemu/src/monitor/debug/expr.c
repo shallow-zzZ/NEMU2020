@@ -239,7 +239,6 @@ uint32_t eval(int p, int q, bool *success){
 		return 0;
 	}else if(p==q){
 		int n = 0;
-		printf("%s\n",tokens[p].str);
 		if(tokens[p].type == HEX) {
 			sscanf(tokens[p].str,"%x",&n);
 			return n;
