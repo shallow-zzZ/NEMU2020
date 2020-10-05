@@ -60,8 +60,8 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/print-FLOAT
-ENTRY := $(kernel_BIN)
+USERPROG := obj/testcase/integral
+ENTRY := $(USERPROG)
 
 entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
