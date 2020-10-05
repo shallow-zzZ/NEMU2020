@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <sys/mman.h>
 #include "FLOAT.h"
 
 extern char _vfprintf_internal;
@@ -14,10 +15,11 @@ __attribute__((used)) static int format_FLOAT(FILE *stream, FLOAT f) {
 	 *         0x00010000    "1.000000"
 	 *         0x00013333    "1.199996"
 	 */
-
-	char buf[80];
-	int len = sprintf(buf, "0x%08x", f);
-	return __stdio_fwrite(buf, len, stream);
+	f = 0;
+	//char buf[80];
+	//int len = sprintf(buf, "0x%08x", f);
+	//return __stdio_fwrite(buf, len, stream);
+	return 0;
 }
 
 static void modify_vfprintf() {
@@ -25,8 +27,15 @@ static void modify_vfprintf() {
 	 * argument during the execution of `_vfprintf_internal'. Below
 	 * is the code section in _vfprintf_internal() relative to the
 	 * hijack.
-	 */
+	 */	
 
+	uint32_t off = 0x306;
+	uint32_t addr = (int)(&_vfprintf_internal) + off + 1;
+
+	mprotect((void *)((addr - 0x65) & 0xfffff000), 4096 * 2, PROT_READ | PROT_WRITE | PROT_EXEC);
+	
+	int *pos = (int *)(addr);
+	*pos += (int)format_FLOAT - (int)(&_fpmaxtostr);
 #if 0
 	else if (ppfs->conv_num <= CONV_A) {  /* floating point */
 		ssize_t nf;
