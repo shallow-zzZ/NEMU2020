@@ -15,11 +15,12 @@ __attribute__((used)) static int format_FLOAT(FILE *stream, FLOAT f) {
 	 *         0x00010000    "1.000000"
 	 *         0x00013333    "1.199996"
 	 */
-	f = 0;
-	//char buf[80];
-	//int len = sprintf(buf, "0x%08x", f);
-	//return __stdio_fwrite(buf, len, stream);
-	return 0;
+
+	char buf[80];
+	int tmp = f & 0x0000ffff;
+	int res = (1LL * tmp * 1000000LL) >> 16;	
+	int len = sprintf(buf, "0x%d.%06d", ((int)(f) >> 16), res);
+	return __stdio_fwrite(buf, len, stream);
 }
 
 static void modify_vfprintf() {
@@ -32,10 +33,17 @@ static void modify_vfprintf() {
 	uint32_t off = 0x306;
 	uint32_t addr = (int)(&_vfprintf_internal) + off + 1;
 
-	mprotect((void *)((addr - 0x65) & 0xfffff000), 4096 * 2, PROT_READ | PROT_WRITE | PROT_EXEC);
+	//mprotect((void *)((addr - 0x65) & 0xfffff000), 4096 * 2, PROT_READ | PROT_WRITE | PROT_EXEC);
 	
 	int *pos = (int *)(addr);
 	*pos += (int)format_FLOAT - (int)(&_fpmaxtostr);
+	int  *f2p = (int *)(addr - 0xc);
+	*f2p = 0x08ff3290;
+	short *fl = (short *)(addr - 0x23);
+	*fl = 0x9090;
+	fl = (short *)(addr - 0x1f);
+	*fl = 0x9090;
+	
 #if 0
 	else if (ppfs->conv_num <= CONV_A) {  /* floating point */
 		ssize_t nf;
