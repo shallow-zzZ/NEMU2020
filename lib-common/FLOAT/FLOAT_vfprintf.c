@@ -18,7 +18,7 @@ __attribute__((used)) static int format_FLOAT(FILE *stream, FLOAT f) {
 
 	char buf[80];
 	int sign = f & (1<<31);
-	if(sign) f = f & 0x7fffffff;
+	if(sign) f = (~f) + 1;
 	int tmp = f & 0x0000ffff;
 	int res = (1LL * tmp * 1000000LL) >> 16;	
 	int len;
@@ -96,7 +96,14 @@ static void modify_ppfs_setargs() {
 	 * Below is the code section in _vfprintf_internal() relative to
 	 * the modification.
 	 */
+	int addr = &_ppfs_setargs;
 
+	char *pos = (char *)(addr + 0x71);
+	*pos = 0xeb;
+	pos = (char *)(addr + 0x72);
+	*pos = 0x30;
+	pos = (char *)(addr + 0x73);
+	*pos = 0x90;
 #if 0
 	enum {                          /* C type: */
 		PA_INT,                       /* int */
