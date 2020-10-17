@@ -57,27 +57,22 @@ static void l1_read(hwaddr_t addr, void *data) {
 	int i;
 	for(i=0;i<NR_LINE;i++){
 		if(L1[grp][i].valid && L1[grp][i].tag == tag){
+
 			/* cache hit */
-			//printf("cache hit good!\n");
+
 			memcpy(data,L1[grp][i].blocks+offset,BURST_LEN);
 			return ;
 		}
 	}
 	
 	/* cache donot hit */
-	//printf("cache hit bad!\n");
+
 	srand((unsigned)time(NULL));
-	int vic = 0;
+	int vic = rand()%8;
 	dram_cache(addr, L1[grp][vic].blocks);
-	L1[grp][vic].valid = 0;
+	L1[grp][vic].valid = 1;
 	L1[grp][vic].tag = tag;
 	memcpy(data,L1[grp][vic].blocks+offset,BURST_LEN);
-	int b=0;
-	printf("%d: ", grp);	
-	for(;b<64;b++){
-		printf("%d ",L1[grp][vic].blocks[b]);
-	}
-	printf("\n");
 }
 
 uint32_t L1_read(hwaddr_t addr, size_t len) {
@@ -92,6 +87,39 @@ uint32_t L1_read(hwaddr_t addr, size_t len) {
 	return unalign_rw(temp+offset, 4);
 }
 
+static void l1_write(hwaddr_t addr, void *data, uint8_t *mask){
+
+	cache_addr temp;
+	temp.addr = addr & ~BURST_MASK;
+	uint32_t offset = temp.offset;
+	uint32_t grp = temp.grp;
+	uint32_t tag = temp.tag;
+
+	int i;
+	for(i=0;i<NR_LINE;i++){
+		if(L1[grp][i].valid && L1[grp][i].tag == tag){
+			
+			/* cache hit */
+			memcpy_with_mask(L1[grp][i].blocks+offset,data,BURST_LEN,mask);
+			return ;
+		}
+	}
+}
+
 void L1_write(hwaddr_t addr, size_t len, uint32_t data) {
+	uint32_t offset = addr & BURST_MASK;
+	uint8_t temp[2 * BURST_LEN];
+	uint8_t mask[2 * BURST_LEN];
+	memset(mask, 0, 2 * BURST_LEN);
+	
+	*(uint32_t *)(temp + offset) = data;
+	memset(mask + offset, 1, len);
+	
+	l1_write(addr, temp, mask);
+
+	if(offset + len > BURST_LEN){
+		/* in different cache block*/
+		l1_write(addr+BURST_LEN, temp+BURST_LEN, mask+BURST_LEN);
+	}
 	dram_write(addr, len, data);
 }
