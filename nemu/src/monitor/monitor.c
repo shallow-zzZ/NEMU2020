@@ -12,6 +12,7 @@ void init_regex();
 void init_wp_pool();
 void init_ddr3();
 void init_l1();
+void init_l2();
 
 FILE *log_fp = NULL;
 
@@ -93,6 +94,9 @@ void restart() {
 	/* Initialize DRAM. */
 	init_ddr3();
 
-	/* INitialize Cache L1*/
+	/* Initialize Cache L1*/
 	init_l1(); 
+
+	/* Initialize Cache L2 */
+	init_l2();
 }
