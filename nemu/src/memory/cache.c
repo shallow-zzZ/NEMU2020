@@ -39,10 +39,10 @@ void init_l1() {
 }
 
 uint32_t L1_read(hwaddr_t addr, size_t len) {
-	//printf("read cache L1!\n");
 	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
 
 void L1_write(hwaddr_t addr, size_t len, uint32_t data) {
+	printf("write in cache!\n");
 	dram_write(addr, len, data);
 }
