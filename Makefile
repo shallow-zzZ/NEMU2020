@@ -29,7 +29,6 @@ include game/Makefile.part
 ##### rules for building the project #####
 
 
-
 nemu: $(nemu_BIN)
 testcase: $(testcase_BIN)
 kernel: $(kernel_BIN)
@@ -60,7 +59,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/add
+USERPROG := obj/testcase/hello-str
 ENTRY := $(kernel_BIN)
 
 entry: $(ENTRY)
