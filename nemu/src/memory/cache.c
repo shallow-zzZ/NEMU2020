@@ -33,6 +33,7 @@ void init_l1() {
 			L1[i][j].valid = 0;
 		}
 	}
+	printf("init cache!\n");
 }
 
 
