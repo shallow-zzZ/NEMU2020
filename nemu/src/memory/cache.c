@@ -70,6 +70,7 @@ static void l1_read(hwaddr_t addr, void *data) {
 	int vic = rand() % 8;
 	dram_cache(addr, L1[grp][vic].blocks);
 	L1[grp][vic].valid = 1;
+	L1[grp][vic].tag = tag;
 	memcpy(data,L1[grp][vic].blocks+offset,BURST_LEN);
 }
 
