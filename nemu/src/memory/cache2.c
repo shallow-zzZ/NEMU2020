@@ -115,7 +115,7 @@ void L2_L1(hwaddr_t addr, void * data) {
 
 			/* cache hit */
 			memcpy(data,L2[grp][i].blocks+offset,BLOCK_LEN);
-			printf("not in L1, but in L2!\n");
+			//printf("not in L1, but in L2!\n");
 			return ;
 		}
 	}
@@ -126,6 +126,7 @@ void L2_L1(hwaddr_t addr, void * data) {
 
 	/* write back */
 	if(L2[grp][vic].dirty){
+		printf("write back!\n");
 		uint32_t pre_addr = (L2[grp][vic].tag << (GRP_WIDTH + OFF_WIDTH)) + (grp << OFF_WIDTH);
 		cache_dram(pre_addr,L2[grp][vic].blocks);		
 	}
