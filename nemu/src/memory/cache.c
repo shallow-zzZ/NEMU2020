@@ -72,7 +72,8 @@ static void l1_read(hwaddr_t addr, void *data) {
 	L1[grp][vic].valid = 0;
 	L1[grp][vic].tag = tag;
 	memcpy(data,L1[grp][vic].blocks+offset,BURST_LEN);
-	int b=0;	
+	int b=0;
+	printf("%d: ", grp);	
 	for(;b<64;b++){
 		printf("%d ",L1[grp][vic].blocks[b]);
 	}
