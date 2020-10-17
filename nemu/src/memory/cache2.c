@@ -115,6 +115,7 @@ void L2_L1(hwaddr_t addr, void * data) {
 
 			/* cache hit */
 			memcpy(data,L2[grp][i].blocks+offset,BLOCK_LEN);
+			printf("not in L1, but in L2!\n");
 			return ;
 		}
 	}
