@@ -72,7 +72,6 @@ static void l2_write(hwaddr_t addr, void *data, uint8_t *mask){
 
 	/* write back */
 	if(L2[grp][vic].dirty){
-		printf("write back!\n");
 		uint32_t pre_addr = (L2[grp][vic].tag << (GRP_WIDTH + OFF_WIDTH)) + (grp << OFF_WIDTH);
 		cache_dram(pre_addr,L2[grp][vic].blocks);		
 	}
