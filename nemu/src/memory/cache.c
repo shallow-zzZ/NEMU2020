@@ -57,12 +57,14 @@ static void l1_read(hwaddr_t addr, void *data) {
 	for(i=0;i<NR_LINE;i++){
 		if(L1[grp][i].valid && L1[grp][i].tag == tag){
 			/* cache hit */
+			printf("cache hit good!\n");
 			memcpy(data,L1[grp][i].blocks+offset,BURST_LEN);
 			return ;
 		}
 	}
 	
 	/* cache donot hit */
+	printf("cache hit bad!\n");
 	srand((unsigned)time(NULL));
 	int vic = rand() % 8;
 	dram_cache(addr, L1[grp][vic].blocks);
