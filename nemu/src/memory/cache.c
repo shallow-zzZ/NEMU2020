@@ -6,10 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-void dram_write(hwaddr_t, size_t, uint32_t);
-
-uint32_t dram_cache(hwaddr_t, void *);
-
+uint32_t L2_L1(hwaddr_t, void *);
+void L2_write(hwaddr_t, size_t, uint32_t);
 #define GRP_WIDTH 7
 #define OFF_WIDTH 6
 #define TAG_WIDTH (27 - GRP_WIDTH - OFF_WIDTH)
@@ -33,6 +31,7 @@ typedef union {
 
 #define NR_GRP (1 << GRP_WIDTH)
 #define NR_LINE 8
+#define HW_MEM_SIZE (1<<27)
 
 Cache1 L1[NR_GRP][NR_LINE];
 
@@ -46,7 +45,7 @@ void init_l1() {
 }
 
 static void l1_read(hwaddr_t addr, void *data) {
-	//Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
+	Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
 
 	cache_addr temp;
 	temp.addr = addr & ~BURST_MASK;
@@ -59,7 +58,6 @@ static void l1_read(hwaddr_t addr, void *data) {
 		if(L1[grp][i].valid && L1[grp][i].tag == tag){
 
 			/* cache hit */
-
 			memcpy(data,L1[grp][i].blocks+offset,BURST_LEN);
 			return ;
 		}
@@ -69,7 +67,7 @@ static void l1_read(hwaddr_t addr, void *data) {
 
 	srand((unsigned)time(NULL));
 	int vic = rand()%8;
-	dram_cache(addr, L1[grp][vic].blocks);
+	L2_L1(addr, L1[grp][vic].blocks);
 	L1[grp][vic].valid = 1;
 	L1[grp][vic].tag = tag;
 	memcpy(data,L1[grp][vic].blocks+offset,BURST_LEN);
@@ -88,7 +86,7 @@ uint32_t L1_read(hwaddr_t addr, size_t len) {
 }
 
 static void l1_write(hwaddr_t addr, void *data, uint8_t *mask){
-
+	Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
 	cache_addr temp;
 	temp.addr = addr & ~BURST_MASK;
 	uint32_t offset = temp.offset;
@@ -121,5 +119,5 @@ void L1_write(hwaddr_t addr, size_t len, uint32_t data) {
 		/* in different cache block*/
 		l1_write(addr+BURST_LEN, temp+BURST_LEN, mask+BURST_LEN);
 	}
-	dram_write(addr, len, data);
+	L2_write(addr, len, data);
 }
