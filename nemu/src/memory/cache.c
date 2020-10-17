@@ -1,7 +1,14 @@
 #include "common.h"
+#include "burst.h"
+#include "misc.h"
 
-uint32_t dram_read(hwaddr_t, size_t);
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 void dram_write(hwaddr_t, size_t, uint32_t);
+
+uint32_t dram_cache(hwaddr_t, void *);
 
 #define GRP_WIDTH 7
 #define OFF_WIDTH 6
@@ -11,7 +18,7 @@ void dram_write(hwaddr_t, size_t, uint32_t);
 typedef struct{
 	uint32_t valid : VALID_WIDTH;
 	uint32_t tag   : TAG_WIDTH;
-	uint8_t block[64]; 
+	uint8_t  blocks[64]; 
 }Cache1;
 
 typedef union {
@@ -35,14 +42,45 @@ void init_l1() {
 			L1[i][j].valid = 0;
 		}
 	}
-	printf("init cache!\n");
+}
+
+static void l1_read(hwaddr_t addr, void *data) {
+	//Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
+
+	cache_addr temp;
+	temp.addr = addr & ~BURST_MASK;
+	uint32_t offset = temp.offset;
+	uint32_t grp = temp.grp;
+	uint32_t tag = temp.tag;
+
+	int i;
+	for(i=0;i<NR_LINE;i++){
+		if(L1[grp][i].valid && L1[grp][i].tag == tag){
+			/* cache hit */
+			memcpy(data,L1[grp][i].blocks+offset,BURST_LEN);
+			return ;
+		}
+	}
+	
+	/* cache donot hit */
+	srand((unsigned)time(NULL));
+	int vic = rand() % 8;
+	dram_cache(addr, L1[grp][vic].blocks);
+	memcpy(data,L1[grp][vic].blocks+offset,BURST_LEN);
 }
 
 uint32_t L1_read(hwaddr_t addr, size_t len) {
-	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
+	uint32_t offset = addr & BURST_MASK;
+	uint8_t temp[2 * BURST_LEN];
+
+	l1_read(addr, temp);
+	if(offset + len > BURST_LEN) {
+		/* in different cache block*/
+		l1_read(addr + BURST_LEN, temp + BURST_LEN);
+	}
+	return unalign_rw(temp+offset, 4);
 }
 
 void L1_write(hwaddr_t addr, size_t len, uint32_t data) {
-	printf("write in cache!\n");
 	dram_write(addr, len, data);
 }

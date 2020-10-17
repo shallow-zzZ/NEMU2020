@@ -126,3 +126,24 @@ void dram_write(hwaddr_t addr, size_t len, uint32_t data) {
 		ddr3_write(addr + BURST_LEN, temp + BURST_LEN, mask + BURST_LEN);
 	}
 }
+
+void dram_cache(hwaddr_t addr, void * data) {
+	Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
+	
+	dram_addr temp;
+	temp.addr = addr & ~BLOCK_MASK;
+	uint32_t rank = temp.rank;
+	uint32_t bank = temp.bank;
+	uint32_t row = temp.row;
+	uint32_t col = temp.col;
+
+	if(!(rowbufs[rank][bank].valid && rowbufs[rank][bank].row_idx == row) ) {
+		/* read a row into row buffer */
+		memcpy(rowbufs[rank][bank].buf, dram[rank][bank][row], NR_COL);
+		rowbufs[rank][bank].row_idx = row;
+		rowbufs[rank][bank].valid = true;
+	}
+
+	/* burst read */
+	memcpy(data, rowbufs[rank][bank].buf + col, BLOCK_LEN);
+}

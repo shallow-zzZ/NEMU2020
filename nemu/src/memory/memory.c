@@ -6,7 +6,7 @@ void L1_write(hwaddr_t, size_t, uint32_t);
 /* Memory accessing interfaces */
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
-	return L1_read(addr,len);
+	return L1_read(addr,len) & (~0u >> ((4 - len) << 3));
 	//return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
 
