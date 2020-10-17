@@ -11,6 +11,7 @@ void load_elf_tables(int, char *[]);
 void init_regex();
 void init_wp_pool();
 void init_ddr3();
+void init_l1();
 
 FILE *log_fp = NULL;
 
@@ -91,4 +92,7 @@ void restart() {
 	
 	/* Initialize DRAM. */
 	init_ddr3();
+
+	/* INitialize Cache L1*/
+	init_l1(); 
 }
