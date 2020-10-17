@@ -67,11 +67,16 @@ static void l1_read(hwaddr_t addr, void *data) {
 	/* cache donot hit */
 	//printf("cache hit bad!\n");
 	srand((unsigned)time(NULL));
-	int vic = rand() % 8;
+	int vic = 0;
 	dram_cache(addr, L1[grp][vic].blocks);
-	L1[grp][vic].valid = 1;
+	L1[grp][vic].valid = 0;
 	L1[grp][vic].tag = tag;
 	memcpy(data,L1[grp][vic].blocks+offset,BURST_LEN);
+	int b=0;	
+	for(;b<64;b++){
+		printf("%d ",L1[grp][vic].blocks[b]);
+	}
+	printf("\n");
 }
 
 uint32_t L1_read(hwaddr_t addr, size_t len) {
