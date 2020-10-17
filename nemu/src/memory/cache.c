@@ -1,5 +1,7 @@
 #include "common.h"
 
+uint32_t dram_read(hwaddr_t, size_t);
+void dram_write(hwaddr_t, size_t, uint32_t);
 
 #define GRP_WIDTH 7
 #define OFF_WIDTH 6
@@ -36,7 +38,7 @@ void init_l1() {
 	printf("init cache!\n");
 }
 
-void L1_read(hwaddr_t addr, size_t len) {
-	printf("read cache L1!\n");
-	return ;
+uint32_t L1_read(hwaddr_t addr, size_t len) {
+	//printf("read cache L1!\n");
+	return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
