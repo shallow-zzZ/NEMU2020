@@ -36,4 +36,7 @@ void init_l1() {
 	printf("init cache!\n");
 }
 
-
+void L1_read(hwaddr_t addr, size_t len) {
+	printf("read cache L1!\n");
+	return ;
+}
