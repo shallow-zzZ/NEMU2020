@@ -15,7 +15,6 @@ uint32_t dram_cache(hwaddr_t, void *);
 #define TAG_WIDTH (27 - GRP_WIDTH - OFF_WIDTH)
 #define VALID_WIDTH 1
 
-#define HW_MEM_SIZE (1 << (GRP_WIDTH + OFF_WIDTH + TAG_WIDTH))
 
 typedef struct{
 	uint32_t valid : VALID_WIDTH;
@@ -47,7 +46,7 @@ void init_l1() {
 }
 
 static void l1_read(hwaddr_t addr, void *data) {
-	Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
+	//Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
 
 	cache_addr temp;
 	temp.addr = addr & ~BURST_MASK;
