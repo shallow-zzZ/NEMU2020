@@ -24,3 +24,7 @@ make_helper_v(mov_moffs2a)
 make_helper(mov_cr2r){
 	return 3;
 }
+
+make_helper(mov_r2cr){
+	return 3;
+}
