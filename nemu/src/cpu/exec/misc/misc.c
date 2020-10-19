@@ -29,5 +29,6 @@ make_helper(lgdt) {
 	cpu.gdtr.base = op_src->val;
 	decode_i_w(eip+5);
 	cpu.gdtr.limit = op_src->val;
+	print_asm("lgdt %x %x",cpu.gdtr.base, cpu.gdtr.limit);
 	return 7;
 }
