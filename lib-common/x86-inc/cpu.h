@@ -45,9 +45,12 @@ typedef union SREG {
 }SREG;
 
 /* GDTR */
-typedef struct GDTR {
-	uint32_t base;
-	uint16_t len;
+typedef union GDTR {
+	struct {
+		uint32_t base;
+		uint16_t limit;
+	};
+	uint64_t val : 48;
 }GDTR;
 
 #endif
