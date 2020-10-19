@@ -43,6 +43,7 @@ void init_l2() {
 	for(i=0;i<NR_GRP;i++){
 		for(j=0;j<NR_LINE;j++){
 			L2[i][j].valid = 0;
+			L2[i][j].dirty = 0;
 		}
 	}
 }
@@ -68,7 +69,7 @@ static void l2_write(hwaddr_t addr, void *data, uint8_t *mask){
 
 	/* cache donot hit */
 	srand((unsigned)time(NULL));
-	int vic = rand()%8;
+	int vic = rand()%16;
 
 	/* write back */
 	if(L2[grp][vic].dirty){
