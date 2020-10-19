@@ -44,5 +44,10 @@ typedef union SREG {
 	uint16_t val;
 }SREG;
 
+/* GDTR */
+typedef struct GDTR {
+	uint32_t base;
+	uint16_t len;
+}GDTR;
 
 #endif
