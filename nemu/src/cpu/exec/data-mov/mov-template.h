@@ -28,4 +28,30 @@ make_helper(concat(mov_moffs2a_, SUFFIX)) {
 	return 5;
 }
 
+#if DATA_BYTE == 4
+make_helper(mov_cr2r){
+	uint8_t opcode = instr_fetch(eip + 1, 1);
+	if(opcode == 0xc0) {
+		cpu.eax = cpu.cr0.val;
+		print_asm("mov" str(SUFFIX) " cr0 %%eax");
+	}else if(opcode == 0xd8) {
+		cpu.eax = cpu.cr3.val;
+		print_asm("mov" str(SUFFIX) " cr3 %%eax");
+	}
+	return 2;
+}
+
+make_helper(mov_r2cr){
+	uint8_t opcode = instr_fetch(eip + 1, 1);
+	if(opcode == 0xc0) {
+		cpu.cr0.val = cpu.eax;
+		print_asm("mov" str(SUFFIX) " %%eax cr0");
+	}else if(opcode == 0xd8) {
+		cpu.cr3.val = cpu.eax;
+		print_asm("mov" str(SUFFIX) " %%eax cr3");
+	}
+	return 2;
+}
+#endif
+
 #include "cpu/exec/template-end.h"

@@ -57,6 +57,7 @@ typedef struct {
 		uint32_t eflags;
 	};
 	CR0 cr0;
+	CR3 cr3;
 	SREG cs, ds, es, ss;
 	GDTR gdtr;
 } CPU_state;
