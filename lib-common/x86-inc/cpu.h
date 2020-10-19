@@ -34,4 +34,15 @@ typedef union CR3 {
 	uint32_t val;
 } CR3;
 
+/* Segment Registers */
+typedef union SREG {
+	struct {
+		uint16_t index   : 13;
+		uint16_t TI      : 1;
+		uint16_t RPL     : 2;
+	};
+	uint16_t val;
+}SREG;
+
+
 #endif
