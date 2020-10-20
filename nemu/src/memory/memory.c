@@ -18,7 +18,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 
 lnaddr_t seg_translate(swaddr_t addr, size_t len, uint8_t sreg){
 	if(cpu.cr0.protect_enable){
-		//assert(addr < cpu.s_cache[sreg].limit);
+		assert(addr < cpu.s_cache[sreg].limit);
 		lnaddr_t lnaddr = cpu.s_cache[sreg].base + addr;
 		return lnaddr;
 	}
