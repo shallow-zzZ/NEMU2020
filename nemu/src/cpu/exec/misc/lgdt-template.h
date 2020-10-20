@@ -10,6 +10,7 @@ static void do_execute() {
 	else if(op_src->size == 4){
 		cpu.gdtr.limit = lnaddr_read(op_src->addr,2); // 2 byte
 		cpu.gdtr.base = lnaddr_read(op_src->addr+2,4); // 4 byte
+		printf("%x %x\n", cpu.gdtr.limit, cpu.gdtr.base);
 	}
 	print_asm_template1();
 }
