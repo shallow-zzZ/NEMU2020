@@ -38,6 +38,7 @@
 #include "string/lods.h"
 
 #include "misc/misc.h"
+#include "misc/lgdt.h"
 
 #include "special/special.h"
 

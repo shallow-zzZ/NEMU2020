@@ -4,6 +4,5 @@
 make_helper(nop);
 make_helper(int3);
 make_helper(lea);
-make_helper(lgdt);
 
 #endif
