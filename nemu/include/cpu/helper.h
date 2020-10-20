@@ -22,8 +22,9 @@ static inline int idex(swaddr_t eip, int (*decode)(swaddr_t), void (*execute) (v
 
 /* LOAD SEGMENT'S BASE LIMIT INTO SEGMENT'S CACHE INVISIBLE PART*/
 static inline void LoadScache(uint8_t sreg) {
-	//uint32_t addr = (cpu.sreg[sreg].index << 3) + cpu.gdtr.base;
-	uint32_t addr = (1 << 3) + cpu.gdtr.base;
+	printf("%d\n", cpu.cs.val);
+	uint32_t addr = (cpu.sreg[sreg].index << 3) + cpu.gdtr.base;
+	//uint32_t addr = (1 << 3) + cpu.gdtr.base;
 	printf("0x%x\n", addr);
 	SegDesc segdesc;
 	segdesc.high = lnaddr_read(addr,4);
