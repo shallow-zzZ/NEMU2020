@@ -24,14 +24,11 @@ static inline int idex(swaddr_t eip, int (*decode)(swaddr_t), void (*execute) (v
 static inline void LoadScache(uint8_t sreg) {
 	printf("%d %d\n", cpu.cs.val, cpu.sreg[sreg].index);
 	uint32_t addr = (cpu.sreg[sreg].index << 3) + cpu.gdtr.base;
-	//uint32_t addr = (1 << 3) + cpu.gdtr.base;
-	printf("0x%x\n", addr);
 	SegDesc segdesc;
-	segdesc.high = lnaddr_read(addr,4);
-	segdesc.low = lnaddr_read(addr+4,4);
+	segdesc.low = lnaddr_read(addr,4);
+	segdesc.high = lnaddr_read(addr+4,4);
 	cpu.s_cache[sreg].base = (segdesc.base_31_24 << 24) + (segdesc.base_23_16 << 16) + (segdesc.base_15_0 << 0);
 	cpu.s_cache[sreg].limit = segdesc.limit_15_0;
-	printf("%d %x\n", sreg, cpu.s_cache[sreg].base);
 }
 
 /* shared by all helper function */

@@ -90,8 +90,8 @@ typedef union SegmentDescriptor {
 		uint32_t base_31_24          : 8;
 	};
 	struct {
-		uint32_t high;
-		uint32_t low;	
+		uint32_t low;
+		uint32_t high;	
 	};
 } SegDesc;
 
