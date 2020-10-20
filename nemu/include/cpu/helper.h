@@ -29,7 +29,7 @@ static inline void LoadScache(uint8_t sreg) {
 	segdesc.val = (high << 4) + low;
 	cpu.s_cache[sreg].base = (segdesc.base_31_24 << 24) + (segdesc.base_23_16 << 16) + (segdesc.base_15_0 << 0);
 	cpu.s_cache[sreg].limit = segdesc.limit_15_0;
-	printf("%d %xn", sreg, cpu.s_cache[sreg].base);
+	printf("%d %x\n", sreg, cpu.s_cache[sreg].base);
 }
 
 /* shared by all helper function */
