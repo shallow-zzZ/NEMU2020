@@ -25,13 +25,13 @@ make_helper(concat(jmp_rm_,SUFFIX)) {
 
 #if DATA_BYTE == 4
 make_helper(ljmp) {
-	int op1 = instr_fetch(eip+1,4);
-	int op2 = instr_fetch(eip+5,2);
+	uint32_t op1 = instr_fetch(eip+1,4);
+	uint16_t op2 = instr_fetch(eip+5,2);
 	cpu.eip = op1-7;
 	cpu.cs.val = op2;
 	LoadScache(R_CS);
-	print_asm("%d %d",cpu.s_cache[R_CS].base, cpu.s_cache[R_CS].limit);
-	print_asm("ljmp %d %d",op1, op2);
+	//print_asm("%d %d",cpu.s_cache[R_CS].base, cpu.s_cache[R_CS].limit);
+	print_asm("ljmp 0x%x %x",op1, op2);
 	return 7;
 }
 #endif
