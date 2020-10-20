@@ -54,4 +54,17 @@ make_helper(mov_r2cr){
 }
 #endif
 
+#if DATA_BYTE == 2
+make_helper(mov_rm2sreg){
+	uint8_t opcode = instr_fetch(eip+1,1);
+	if(opcode == 0xd8) { // DS
+		cpu.ds.val = reg_w(R_AX);
+	}
+	if(opcode == 0xc0) { // ES
+		cpu.es.val = reg_w(R_AX);
+	}
+	return 2;
+}
+#endif
+
 #include "cpu/exec/template-end.h"
