@@ -25,10 +25,8 @@ make_helper(lea) {
 }
 
 make_helper(lgdt) {
-	decode_i_l(eip);
-	cpu.gdtr.base = op_src->val;
-	decode_i_w(eip+4);
-	cpu.gdtr.limit = op_src->val;
-	print_asm("lgdt %x %x",cpu.gdtr.base, cpu.gdtr.limit);
-	return 6;
+	int len = decode_rm_l(eip+1);
+	cpu.gdtr.limit = lnaddr_read(op_src->addr,2); // 2 byte
+	cpu.gdtr.base = lnaddr_read(op_src->addr+2,4); // 4 byte
+	return len+1;
 }
