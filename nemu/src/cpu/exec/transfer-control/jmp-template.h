@@ -27,7 +27,7 @@ make_helper(concat(jmp_rm_,SUFFIX)) {
 make_helper(ljmp) {
 	uint32_t op1 = instr_fetch(eip+1,4);
 	uint16_t op2 = instr_fetch(eip+5,2);
-	print_asm("ljmp 0x%x %x",op1, op2);
+	print_asm("%x ljmp 0x%x %x",cpu.eip, op1, op2);
 	cpu.eip = op1-7;
 	cpu.cs.val = op2;
 	LoadScache(R_CS);
