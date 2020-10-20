@@ -45,6 +45,7 @@ make_helper(mov_r2cr){
 	uint8_t opcode = instr_fetch(eip + 1, 1);
 	if(opcode == 0xc0) {
 		cpu.cr0.val = cpu.eax;
+		printf("%d\n",cpu.cr0.protect_enable);
 		print_asm("mov" str(SUFFIX) " %%eax %%cr0");
 	}else if(opcode == 0xd8) {
 		cpu.cr3.val = cpu.eax;
