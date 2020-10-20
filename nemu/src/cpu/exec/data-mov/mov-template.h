@@ -59,17 +59,17 @@ make_helper(mov_rm2sreg){
 	uint8_t opcode = instr_fetch(eip+1,1);
 	if(opcode == 0xd8) { // DS
 		cpu.ds.val = reg_w(R_AX);
-		LoadScache(R_DS);
+		//LoadScache(R_DS);
 		print_asm("mov sreg %%DS");
 	}
 	if(opcode == 0xc0) { // ES
 		cpu.es.val = reg_w(R_AX);
-		LoadScache(R_ES);
+		//LoadScache(R_ES);
 		print_asm("mov sreg %%ES");
 	}
 	if(opcode == 0xd0) { // SS
 		cpu.ss.val = reg_w(R_AX);
-		LoadScache(R_SS);
+		//LoadScache(R_SS);
 		print_asm("mov sreg %%SS");
 	}
 	return 2;
