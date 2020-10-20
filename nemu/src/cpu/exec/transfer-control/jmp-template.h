@@ -29,6 +29,8 @@ make_helper(ljmp) {
 	int op2 = instr_fetch(eip+5,2);
 	cpu.eip = op1-7;
 	cpu.cs.val = op2;
+	LoadScache(R_CS);
+	print_asm("ljmp %d %d",op1, op2);
 	return 7;
 }
 #endif
