@@ -59,12 +59,7 @@ typedef struct {
 	};
 	CR0 cr0;
 	CR3 cr3;
-	union {
-		struct {
-			SREG cs, ss, ds, es, fs, gs; 
-		};
-		SREG sreg[6];
-	};
+	SREG sreg[6];
 	SCACHE s_cache[6];
 	GDTR gdtr;
 } CPU_state;
