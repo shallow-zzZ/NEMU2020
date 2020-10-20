@@ -99,7 +99,7 @@ static int cmd_x(char *args) {
 		return 0;
 	}
 	for(i=0;i<n;i++) {
-		printf("addr 0x%x: 0x%x\n", addr, swaddr_read(addr,4));
+		printf("addr 0x%x: 0x%x\n", addr, swaddr_read(addr,4,R_DS));
 		addr+=4;
 	}
 	return 0;
@@ -149,12 +149,12 @@ static int cmd_bt(char *args) {
 		printf("%d 0x%x: ", ++cnt, now_ret);
 		printf("%s ", name);
 		for(i = 0; i < 4; i++) {
-			printf("%d", swaddr_read(now_ebp + 8 + i * 4, 4));
+			printf("%d", swaddr_read(now_ebp + 8 + i * 4, 4, R_DS));
 			if(i==3) printf("\n");
 			else printf(", ");
 		}
-		now_ret = swaddr_read(now_ebp + 4, 4);
-		now_ebp = swaddr_read(now_ebp, 4);
+		now_ret = swaddr_read(now_ebp + 4, 4, R_DS);
+		now_ebp = swaddr_read(now_ebp, 4, R_DS);
 		printf("\n");
 	}
 	return 0;

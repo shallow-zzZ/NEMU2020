@@ -3,7 +3,7 @@
 #define instr scas
 
 make_helper(concat(scas_,SUFFIX)){
-	DATA_TYPE src = swaddr_read(cpu.edi, DATA_BYTE);
+	DATA_TYPE src = swaddr_read(cpu.edi, DATA_BYTE, R_ES);
 	DATA_TYPE dest = concat(reg_,SUFFIX)(R_EAX);
 	DATA_TYPE res = dest - src;
 	if(dest>0 && src<0 && res<0){

@@ -3,7 +3,7 @@
 #define instr lods
 
 make_helper(concat(lods_,SUFFIX)){
-	DATA_TYPE src = swaddr_read(cpu.esi, DATA_BYTE);
+	DATA_TYPE src = swaddr_read(cpu.esi, DATA_BYTE, R_DS);
 	concat(reg_,SUFFIX)(R_EAX) = src;
 	if(!cpu.DF){
 		cpu.esi += DATA_BYTE;

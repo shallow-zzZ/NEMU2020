@@ -5,7 +5,7 @@
 make_helper(concat(call_i_,SUFFIX)) {
 	int len = concat(decode_i_,SUFFIX)(eip+1);
 	reg_l(R_ESP) -= DATA_BYTE;
-        swaddr_write(reg_l(R_ESP), 4, cpu.eip + 4);
+        swaddr_write(reg_l(R_ESP), 4, cpu.eip + 4, R_SS);
 	cpu.eip += op_src->val;
 	if(DATA_BYTE == 2){
 		cpu.eip = cpu.eip & 0x0000ffff;
@@ -17,7 +17,7 @@ make_helper(concat(call_i_,SUFFIX)) {
 make_helper(concat(call_rm_,SUFFIX)) {
 	int len = concat(decode_rm_,SUFFIX)(eip+1);
 	reg_l(R_ESP) -= DATA_BYTE;
-        swaddr_write(reg_l(R_ESP), 4, cpu.eip + len);
+        swaddr_write(reg_l(R_ESP), 4, cpu.eip + len, R_SS);
 	cpu.eip = op_src->val;
 	if(DATA_BYTE == 2){
                cpu.eip = cpu.eip & 0x0000ffff;

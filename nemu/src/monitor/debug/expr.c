@@ -279,7 +279,7 @@ uint32_t eval(int p, int q, bool *success){
 			case(OR): return (val1||val2);
 			case(NEG): return (-val2);
 			case(NOT): return (!val2);
-			case(STAR): return swaddr_read(val2,4);
+			case(STAR): return swaddr_read(val2,4,R_DS);
 			default: assert(0);
 		}
 	}

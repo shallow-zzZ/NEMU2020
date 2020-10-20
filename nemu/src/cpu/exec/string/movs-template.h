@@ -3,8 +3,8 @@
 #define instr movs
 
 make_helper(concat(movs_,SUFFIX)){
-	DATA_TYPE src = swaddr_read(cpu.esi,DATA_BYTE);
-	swaddr_write(cpu.edi, DATA_BYTE, src);
+	DATA_TYPE src = swaddr_read(cpu.esi,DATA_BYTE,R_DS);
+	swaddr_write(cpu.edi, DATA_BYTE, src, R_ES);
 	if(!cpu.DF){
 		cpu.esi += DATA_BYTE;
 		cpu.edi += DATA_BYTE;
