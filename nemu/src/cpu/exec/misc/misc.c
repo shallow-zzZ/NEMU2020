@@ -23,10 +23,3 @@ make_helper(lea) {
 	print_asm("leal %s,%%%s", op_src->str, regsl[m.reg]);
 	return 1 + len;
 }
-
-make_helper(lgdt) {
-	int len = decode_rm_l(eip+1);
-	cpu.gdtr.limit = lnaddr_read(op_src->addr,2); // 2 byte
-	cpu.gdtr.base = lnaddr_read(op_src->addr+2,4); // 4 byte
-	return len+1;
-}

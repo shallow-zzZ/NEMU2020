@@ -23,4 +23,14 @@ make_helper(concat(jmp_rm_,SUFFIX)) {
 }
 #endif
 
+#if DATA_BYTE == 4
+make_helper(ljmp) {
+	int op1 = instr_fetch(eip+1,4);
+	int op2 = instr_fetch(eip+5,2);
+	cpu.eip = op1-7;
+	cpu.cs.val = op2;
+	return 7;
+}
+#endif
+
 #include "cpu/exec/template-end.h"
