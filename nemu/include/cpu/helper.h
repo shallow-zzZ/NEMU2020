@@ -26,8 +26,8 @@ static inline void LoadScache(uint8_t sreg) {
 	SegDesc segdesc;
 	segdesc.low = lnaddr_read(addr,4);
 	segdesc.high = lnaddr_read(addr+4,4);
-	cpu.s_cache[sreg].base = (segdesc.base_31_24 << 24) + (segdesc.base_23_16 << 16) + (segdesc.base_15_0 << 0);
-	cpu.s_cache[sreg].limit = segdesc.limit_15_0;
+	cpu.s_cache[sreg].base = (segdesc.base_31_24 << 24) | (segdesc.base_23_16 << 16) | (segdesc.base_15_0 << 0);
+	cpu.s_cache[sreg].limit = (segdesc.limit_19_16 << 16) | segdesc.limit_15_0;
 }
 
 /* shared by all helper function */

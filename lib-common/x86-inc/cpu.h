@@ -47,7 +47,7 @@ typedef union SREG {
 /* seg cache */
 typedef struct SCACHE {
 	uint32_t base;
-	uint16_t limit;
+	uint32_t limit;
 }SCACHE;
 
 /* GDTR */
