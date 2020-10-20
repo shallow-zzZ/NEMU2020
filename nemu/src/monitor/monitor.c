@@ -92,7 +92,6 @@ void restart() {
 	cpu.eip = ENTRY_START;
 	cpu.eflags = EFLAGS_START;
 	cpu.cr0.val = CR0_START;
-	printf("pe: %d\n", cpu.cr0.protect_enable);
 	
 	/* Initialize DRAM. */
 	init_ddr3();
