@@ -167,21 +167,26 @@ static int cmd_page(char *args) {
 		printf("Cannot recognise the expression!\n");
 		return 0;
 	}
-	printf("epression: %s  result: 0x%x\n",args,addr);
-	/*if(cpu.cr0.protect_enable && cpu.cr0.paging) {
+	hwaddr_t hwaddr = addr;
+	if(cpu.cr0.protect_enable && cpu.cr0.paging) {
 		p_lnaddr_t p_lnaddr;
 		p_lnaddr.val = addr;
 		PDE pde; PTE pte;
 		hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
 		pde.val = hwaddr_read(pde_addr, 4);
-		assert(pde.present);
+		if(!pde.present){
+			printf("Invalid page!\n");
+			return 0;
+		}
 		hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
 		pte.val = hwaddr_read(pte_addr, 4);
-		assert(pte.present);
-		hwaddr_t hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
-		return hwaddr;
+		if(!pte.present){
+			printf("Invalid page!\n");
+			return 0;
+		}
+		hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 	}
-	return addr;*/
+	printf("epression: %s  lnaddr: 0x%x hwaddr: 0x%x\n",args,addr,hwaddr);
 	return 0;
 }
 
