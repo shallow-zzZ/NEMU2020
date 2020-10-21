@@ -27,7 +27,7 @@ void init_page(void) {
 
 		ptable += NR_PTE;
 	}
-
+	set_bp();
 	/* fill PTEs */
 
 	/* We use inline assembly here to fill PTEs for efficiency.
@@ -64,7 +64,6 @@ void init_page(void) {
 	/* set PG bit in CR0 to enable paging */
 	cr0.val = read_cr0();
 	cr0.paging = 1;
-	set_bp();
 	write_cr0(cr0.val);
 }
 
