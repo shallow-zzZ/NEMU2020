@@ -10,7 +10,6 @@ PDE* get_kpdir() { return kpdir; }
 
 /* set up page tables for kernel */
 void init_page(void) {
-	set_bp();
 	CR0 cr0;
 	CR3 cr3;
 	PDE *pdir = (PDE *)va_to_pa(kpdir);
@@ -40,7 +39,6 @@ void init_page(void) {
 		jge 1b;\
 		cld" : :
 		"i"(PAGE_SIZE), "a"((PHY_MEM - PAGE_SIZE) | 0x7), "D"(ptable - 1));
-	set_bp();
 
 	/*
 		===== referenced code for the inline assembly above =====
