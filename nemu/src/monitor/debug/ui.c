@@ -181,12 +181,12 @@ static int cmd_page(char *args) {
 		hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
 		pte.val = hwaddr_read(pte_addr, 4);
 		if(!pte.present){
-			printf("Invalid page!\n");
+			printf("\33[1;31mInvalid page!\n");
 			return 0;
 		}
 		hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 	}
-	printf("epression: %s  lnaddr: 0x%x hwaddr: 0x%x\n",args,addr,hwaddr);
+	printf("\33[1;32mepression: %s  lnaddr: 0x%x --> hwaddr: 0x%x\n",args,addr,hwaddr);
 	return 0;
 }
 
