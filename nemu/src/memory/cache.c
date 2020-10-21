@@ -86,7 +86,7 @@ uint32_t L1_read(hwaddr_t addr, size_t len) {
 }
 
 static void l1_write(hwaddr_t addr, void *data, uint8_t *mask){
-	Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
+	//Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
 	cache_addr temp;
 	temp.addr = addr & ~BURST_MASK;
 	uint32_t offset = temp.offset;
