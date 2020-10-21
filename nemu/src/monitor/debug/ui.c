@@ -186,7 +186,7 @@ static int cmd_page(char *args) {
 		}
 		hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 	}
-	printf("\33[1;32mepression: %s  lnaddr: 0x%x --> hwaddr: 0x%x\n",args,addr,hwaddr);
+	printf("\33[1;32mepression: %s  lnaddr: 0x%x --> hwaddr: 0x%x\n\33[0m",args,addr,hwaddr);
 	return 0;
 }
 
