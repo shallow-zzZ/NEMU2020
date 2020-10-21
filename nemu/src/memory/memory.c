@@ -18,6 +18,7 @@ void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
 
 hwaddr_t page_translate(lnaddr_t addr) {
 	if(cpu.cr0.protect_enable && cpu.cr0.paging) {
+		printf("page!\n");
 		p_lnaddr_t p_lnaddr;
 		p_lnaddr.val = addr;
 		PDE pde; PTE pte;
