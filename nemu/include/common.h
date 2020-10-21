@@ -25,7 +25,7 @@ typedef union{
 	struct {
 		uint32_t offset  : 12;
 		uint32_t page    : 10;
-		uint32_t dir     : 10
+		uint32_t dir     : 10;
 	};
 	uint32_t val;
 }p_lnaddr_t;
