@@ -164,7 +164,7 @@ static int cmd_page(char *args) {
 	bool flag = true;
 	uint32_t addr = expr(args, &flag);
 	if(!flag){
-		printf("Cannot recognise the expression!\n");
+		printf("\33Cannot recognise the expression!\n\33[0m");
 		return 0;
 	}
 	hwaddr_t hwaddr = addr;
