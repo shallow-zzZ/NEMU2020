@@ -175,13 +175,13 @@ static int cmd_page(char *args) {
 		hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
 		pde.val = hwaddr_read(pde_addr, 4);
 		if(!pde.present){
-			printf("Invalid page!\n");
+			printf("\33[1;31mInvalid page!\n\33[0m");
 			return 0;
 		}
 		hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
 		pte.val = hwaddr_read(pte_addr, 4);
 		if(!pte.present){
-			printf("\33[1;31mInvalid page!\n");
+			printf("\33[1;31mInvalid page!\n\33[0m");
 			return 0;
 		}
 		hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
