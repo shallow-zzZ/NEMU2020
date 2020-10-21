@@ -160,6 +160,31 @@ static int cmd_bt(char *args) {
 	return 0;
 }
 
+static int cmd_page(char *args) {
+	bool flag = true;
+	uint32_t addr = expr(args, &flag);
+	if(!flag){
+		printf("Cannot recognise the expression!\n");
+		return 0;
+	}
+	printf("epression: %s  result: 0x%x\n",args,addr);
+	/*if(cpu.cr0.protect_enable && cpu.cr0.paging) {
+		p_lnaddr_t p_lnaddr;
+		p_lnaddr.val = addr;
+		PDE pde; PTE pte;
+		hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
+		pde.val = hwaddr_read(pde_addr, 4);
+		assert(pde.present);
+		hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
+		pte.val = hwaddr_read(pte_addr, 4);
+		assert(pte.present);
+		hwaddr_t hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
+		return hwaddr;
+	}
+	return addr;*/
+	return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -175,6 +200,7 @@ static struct {
 	{ "w", "Set the watchpoint", cmd_w},
 	{ "d", "Delete the watchpoint", cmd_d}, 
 	{ "bt", "Print Stack", cmd_bt},
+	{ "page", "Translate lnaddr to hwaddr", cmd_page},
 	/* TODO: Add more commands */
 
 };
