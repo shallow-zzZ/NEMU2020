@@ -92,6 +92,8 @@ void restart() {
 	cpu.eip = ENTRY_START;
 	cpu.eflags = EFLAGS_START;
 	cpu.cr0.val = CR0_START;
+
+	/* Initialize Segment reg CS */
 	cpu.s_cache[R_CS].base = 0;
 	cpu.s_cache[R_CS].limit = 0xffffffff;
 	/* Initialize DRAM. */

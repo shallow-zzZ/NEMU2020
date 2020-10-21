@@ -21,6 +21,17 @@ typedef uint32_t hwaddr_t;
 typedef uint32_t lnaddr_t;
 typedef uint32_t swaddr_t;
 
+typedef union{
+	struct {
+		uint32_t offset  : 12;
+		uint32_t page    : 10;
+		uint32_t dir     : 10
+	};
+	uint32_t val;
+}p_lnaddr_t;
+
+
+
 typedef uint16_t ioaddr_t;
 
 #pragma pack (1)
