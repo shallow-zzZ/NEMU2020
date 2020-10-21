@@ -39,6 +39,7 @@
 
 #include "misc/misc.h"
 #include "misc/lgdt.h"
+#include "misc/std.h"
 
 #include "special/special.h"
 
