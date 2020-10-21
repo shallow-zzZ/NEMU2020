@@ -47,7 +47,16 @@ uint32_t lnaddr_read(lnaddr_t addr, size_t len) {
 }
 
 void lnaddr_write(lnaddr_t addr, size_t len, uint32_t data) {
-	hwaddr_write(addr, len, data);
+#ifdef DEBUG
+	assert(len == 1 || len == 2 || len == 4);
+#endif
+	if((addr & 0x0fff)+len >= (1<<12)) { // data cross the page boundary
+		assert(0);
+	}
+	else {
+		hwaddr_t hwaddr = page_translate(addr);
+		return hwaddr_write(hwaddr, len, data); 
+	}
 }
 
 /* SEGMENT TRANSLATE swaddr->lnaddr */
