@@ -36,7 +36,7 @@ hwaddr_t page_translate(lnaddr_t addr) {
 			hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
 			pte.val = hwaddr_read(pte_addr, 4);
 			Assert(pte.present, "%x",addr);
-			update_tlb(pte);
+			//update_tlb(pte);
 		}
 		hwaddr_t hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 		return hwaddr;
