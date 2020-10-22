@@ -5,7 +5,7 @@ uint32_t L1_read(hwaddr_t, size_t);
 void L1_write(hwaddr_t, size_t, uint32_t);
 
 PTE read_tlb(lnaddr_t, bool*);
-void update_tlb(PTE);
+void update_tlb(PTE, lnaddr_t);
 
 /* Memory accessing interfaces */
 
@@ -36,7 +36,7 @@ hwaddr_t page_translate(lnaddr_t addr) {
 			hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
 			pte.val = hwaddr_read(pte_addr, 4);
 			Assert(pte.present, "%x",addr);
-			update_tlb(pte);
+			update_tlb(pte, addr);
 		}
 		hwaddr_t hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 		return hwaddr;

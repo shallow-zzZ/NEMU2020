@@ -38,16 +38,16 @@ PTE read_tlb(lnaddr_t addr, bool *success) {
 	return pte;
 }
 
-void update_tlb(PTE pte) {
+void update_tlb(PTE pte, lnaddr_t addr) {
 	/* when not hit, update the tlb */
 	srand((unsigned)time(NULL));
 	int vic = rand()%64;
 	TLB[vic].pte_cache.val = pte.val;
-	TLB[vic].tag = pte.page_frame;
+	TLB[vic].tag = (addr >> 12);
 	TLB[vic].valid = 1;
 	b++;
 	printf("b: %d\n",b);
-	//110w
+	//1184815
 }
 
 
