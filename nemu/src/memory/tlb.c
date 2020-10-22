@@ -44,6 +44,8 @@ void update_tlb(PTE pte, lnaddr_t addr) {
 	TLB[vic].pte_cache.val = pte.val;
 	TLB[vic].tag = (addr >> 12);
 	TLB[vic].valid = 1;
+	b++;
+	printf("a: %d b: %d\n",a, b);
 }
 
 
