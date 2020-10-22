@@ -25,6 +25,7 @@ PTE read_tlb(lnaddr_t addr, bool *success) {
 	for(;i<64;i++) {
 		/* TLB HIT */
 		if(TLB[i].valid && TLB[i].tag == (addr >> 12)) {
+			printf("tlb hit\n");
 			pte.val = TLB[i].pte_cache.val;
 			return pte;
 		}
@@ -35,6 +36,7 @@ PTE read_tlb(lnaddr_t addr, bool *success) {
 
 void update_tlb(PTE pte) {
 	/* when not hit, update the tlb */
+	printf("---------------\n");
 	srand((unsigned)time(NULL));
 	int vic = rand()%64;
 	TLB[vic].pte_cache.val = pte.val;
