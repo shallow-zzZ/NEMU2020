@@ -23,10 +23,10 @@ hwaddr_t page_translate(lnaddr_t addr) {
 		PDE pde; PTE pte;
 		hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
 		pde.val = hwaddr_read(pde_addr, 4);
-		assert(pde.present);
+		Assert(pde.present, "%x", addr);
 		hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
 		pte.val = hwaddr_read(pte_addr, 4);
-		assert(pte.present);
+		Assert(pte.present, "%x",addr);
 		hwaddr_t hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 		return hwaddr;
 	}
