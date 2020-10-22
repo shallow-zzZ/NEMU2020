@@ -25,6 +25,7 @@ PTE read_tlb(lnaddr_t addr, bool *success) {
 	for(;i<64;i++) {
 		/* TLB HIT */
 		if(TLB[i].valid && TLB[i].tag == (addr >> 12)) {
+			*success = false;
 			pte.val = TLB[i].pte_cache.val;
 			return pte;
 		}
