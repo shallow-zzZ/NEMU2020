@@ -8,6 +8,8 @@
 /* Use the function to get the start address of user page directory. */
 PDE* get_updir();
 
+static PTE ptep[1024] align_to_page;
+
 void create_video_mapping() {
 	/* TODO: create an identical mapping from virtual memory area 
 	 * [0xa0000, 0xa0000 + SCR_SIZE) to physical memory area 
@@ -15,8 +17,14 @@ void create_video_mapping() {
 	 * some page tables to create this mapping.
 	 */
 	//panic("please implement me");
-	//PDE* pdir= get_updir();
-	//hwaddr_write((pdir[0].page_frame << 12) + (0xa0 << 2),4,0xa0000001);
+	PDE *pdep = (PDE *)va_to_pa(get_updir());
+	pdep[0].page_frame = (uint32_t) va_to_pa(ptep) >> 12;
+	pdep[0].present = 1;
+	int i;
+	for(i = 0xa0; i < 0xb0 ; i++) {
+		ptep[i].page_frame = i;
+		ptep[i].present = 1;
+	}
 }
 
 void video_mapping_write_test() {
