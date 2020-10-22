@@ -106,6 +106,14 @@ typedef struct GateDescriptor {
 	uint32_t offset_31_16     : 16;
 } GateDesc;
 
+/* TLB ENTRY */
+typedef struct TLBE {
+	uint32_t valid   : 1;
+	uint32_t tag     : 20;
+	PTE pte_cache;
+} TLBE;
+
+
 #endif
 
 #endif

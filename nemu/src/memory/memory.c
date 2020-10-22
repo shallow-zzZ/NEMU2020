@@ -4,6 +4,9 @@
 uint32_t L1_read(hwaddr_t, size_t);
 void L1_write(hwaddr_t, size_t, uint32_t);
 
+PTE read_tlb(lnaddr_t, bool*);
+void update_tlb(PTE);
+
 /* Memory accessing interfaces */
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
@@ -21,12 +24,20 @@ hwaddr_t page_translate(lnaddr_t addr) {
 		p_lnaddr_t p_lnaddr;
 		p_lnaddr.val = addr;
 		PDE pde; PTE pte;
-		hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
-		pde.val = hwaddr_read(pde_addr, 4);
-		Assert(pde.present, "%x", addr);
-		hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
-		pte.val = hwaddr_read(pte_addr, 4);
-		Assert(pte.present, "%x",addr);
+
+		/* READ TLB */
+		bool flag = true;
+		pte = read_tlb(addr, &flag);
+
+		if(!flag) {		
+			hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
+			pde.val = hwaddr_read(pde_addr, 4);
+			Assert(pde.present, "%x", addr);
+			hwaddr_t pte_addr = (pde.page_frame << 12) + (p_lnaddr.page << 2);
+			pte.val = hwaddr_read(pte_addr, 4);
+			Assert(pte.present, "%x",addr);
+			update_tlb(pte);
+		}
 		hwaddr_t hwaddr = (pte.page_frame << 12) + p_lnaddr.offset;
 		return hwaddr;
 	}
