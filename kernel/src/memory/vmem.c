@@ -14,7 +14,9 @@ void create_video_mapping() {
 	 * [0xa0000, 0xa0000 + SCR_SIZE) for user program. You may define
 	 * some page tables to create this mapping.
 	 */
-	panic("please implement me");
+	//panic("please implement me");
+	//PDE* pdir= get_updir();
+	//hwaddr_write((pdir[0].page_frame << 12) + (0xa0 << 2),4,0xa0000001);
 }
 
 void video_mapping_write_test() {
