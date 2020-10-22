@@ -27,9 +27,8 @@ PTE read_tlb(lnaddr_t addr, bool *success) {
 	for(;i<64;i++) {
 		/* TLB HIT */
 		if(TLB[i].valid && TLB[i].tag == (addr >> 12)) {
-			//a++; 
-			//printf("a: %d\n",a);
-			// 18959
+			a++; 
+			printf("a: %d\n",a);
 			pte.val = TLB[i].pte_cache.val;
 			return pte;
 		}
@@ -45,9 +44,6 @@ void update_tlb(PTE pte, lnaddr_t addr) {
 	TLB[vic].pte_cache.val = pte.val;
 	TLB[vic].tag = (addr >> 12);
 	TLB[vic].valid = 1;
-	b++;
-	printf("b: %d\n",b);
-	//1184815
 }
 
 
