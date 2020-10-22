@@ -44,8 +44,8 @@ void update_tlb(PTE pte) {
 	TLB[vic].pte_cache.val = pte.val;
 	TLB[vic].tag = pte.page_frame;
 	TLB[vic].valid = 1;
-	b++;
-	printf("b: %d\n",b);
+	//b++;
+	//printf("b: %d\n",b);
 }
 
 
