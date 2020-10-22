@@ -39,6 +39,7 @@ void update_tlb(PTE pte) {
 	srand((unsigned)time(NULL));
 	int vic = rand()%64;
 	TLB[vic].pte_cache.val = pte.val;
+	TLB[vic].tag = pte.page_frame;
 	TLB[vic].valid = 1;
 }
 
