@@ -29,7 +29,8 @@ hwaddr_t page_translate(lnaddr_t addr) {
 		bool flag = true;
 		pte = read_tlb(addr, &flag);
 
-		if(!flag) {		
+		if(!flag) {
+			printf("tlb not hit!\n");	
 			hwaddr_t pde_addr = (cpu.cr3.page_directory_base << 12) + (p_lnaddr.dir << 2);
 			pde.val = hwaddr_read(pde_addr, 4);
 			Assert(pde.present, "%x", addr);
