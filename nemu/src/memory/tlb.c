@@ -11,7 +11,7 @@ TLBE TLB[NR_GRP];
 
 void init_tlb() {
 	int i=0;
-	for(;i<64;i++) {
+	for(; i<NR_GRP; i++) {
 		TLB[i].valid = 0;
 	}
 }
@@ -25,7 +25,8 @@ PTE read_tlb(lnaddr_t addr, bool *success) {
 	for(;i<64;i++) {
 		/* TLB HIT */
 		if(TLB[i].valid && TLB[i].tag == (addr >> 12)) {
-			pte = TLB[i].pte_cache;
+			printf("tlb hit\n");
+			pte.val = TLB[i].pte_cache.val;
 			return pte;
 		}
 	}
@@ -39,7 +40,6 @@ void update_tlb(PTE pte) {
 	int vic = rand()%64;
 	TLB[vic].pte_cache.val = pte.val;
 	TLB[vic].valid = 1;
-	return ;
 }
 
 
