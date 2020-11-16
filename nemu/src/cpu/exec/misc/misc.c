@@ -1,5 +1,6 @@
 #include "cpu/exec/helper.h"
 #include "cpu/decode/modrm.h"
+#include "cpu/intr.h"
 
 make_helper(nop) {
 	print_asm("nop");
@@ -12,6 +13,12 @@ make_helper(int3) {
 	print_asm("int3");
 
 	return 1;
+}
+
+make_helper(intn) {
+	int len = decode_i_b(eip+1); 
+	raise_intr(op_src->val);
+	return len+1;
 }
 
 make_helper(lea) {
