@@ -39,6 +39,7 @@
 
 #include "misc/misc.h"
 #include "misc/lgdt.h"
+#include "misc/lidt.h"
 #include "misc/std.h"
 #include "misc/cld.h"
 

@@ -56,4 +56,10 @@ typedef struct GDTR {
 	uint16_t limit;
 }GDTR;
 
+/* IDTR */
+typedef struct IDTR {
+	uint32_t base;
+	uint16_t limit;
+}IDTR;
+
 #endif

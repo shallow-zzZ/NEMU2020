@@ -63,6 +63,7 @@ typedef struct {
 	SREG sreg[6];
 	SCACHE s_cache[6];
 	GDTR gdtr;
+	IDTR idtr;
 } CPU_state;
 
 extern CPU_state cpu;
