@@ -16,10 +16,8 @@ static void sys_ioctl(TrapFrame *tf) {
 
 static void sys_write(TrapFrame *tf) {
 	if(tf->ebx == 1 || tf->ebx == 2) {
-		uint32_t buf = tf->ecx;
-		uint32_t len = tf->edx;
-		asm volatile (".byte 0xd6" : : "a"(2), "c"(buf), "d"(len));
-		tf->eax = len;		
+		asm volatile (".byte 0xd6" : : "a"(2), "c"(tf->ecx), "d"(tf->edx));
+		tf->eax = tf->edx;
 		set_bp();
 	}
 }
@@ -39,7 +37,7 @@ void do_syscall(TrapFrame *tf) {
 
 		case SYS_brk: sys_brk(tf); break;
 		case SYS_ioctl: sys_ioctl(tf); break;
-		case SYS_write: sys_write(tf); break;
+		case 2: sys_write(tf); break;
 
 		/* TODO: Add more system calls. */
 
