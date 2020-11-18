@@ -15,7 +15,6 @@ static void sys_ioctl(TrapFrame *tf) {
 }
 
 static void sys_write(TrapFrame *tf) {
-	set_bp();
 	uint32_t buf = tf->ecx;
 	uint32_t len = tf->edx;
 	if(tf->ebx == 1 || tf->ebx == 2) 
@@ -37,7 +36,7 @@ void do_syscall(TrapFrame *tf) {
 
 		case SYS_brk: sys_brk(tf); break;
 		case SYS_ioctl: sys_ioctl(tf); break;
-		case 2: sys_write(tf); break;
+		case SYS_write: sys_write(tf); break;
 
 		/* TODO: Add more system calls. */
 
