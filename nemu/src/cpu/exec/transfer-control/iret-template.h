@@ -6,7 +6,7 @@ make_helper(concat(iret_,SUFFIX)) {
 	LoadScache(R_CS);
 	cpu.eflags = swaddr_read(reg_l(R_ESP)+8, 4, R_SS);
 	reg_l(R_ESP) += 12;
-	printf("iret");
+	print_asm("iret");
 	return 1;
 }
 
