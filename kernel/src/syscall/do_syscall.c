@@ -15,7 +15,8 @@ static void sys_ioctl(TrapFrame *tf) {
 }
 
 static void sys_write(TrapFrame *tf) {
-	asm volatile (".byte 0xd6" : : "a"(2), "c"("00"), "d"(1));
+	set_bp();
+	//asm volatile (".byte 0xd6" : : "a"(2), "c"("00"), "d"(1));
 }
 
 void do_syscall(TrapFrame *tf) {
