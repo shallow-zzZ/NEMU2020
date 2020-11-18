@@ -1,8 +1,5 @@
 #include <setjmp.h>
 
-//#include "reg.h"
-//#include "../cpu/helper.h"
-//#include "../memory/memory.h"
 #include "common.h"
 
 extern jmp_buf jbuf;
