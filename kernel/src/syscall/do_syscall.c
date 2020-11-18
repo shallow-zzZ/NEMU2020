@@ -18,8 +18,8 @@ static void sys_write(TrapFrame *tf) {
 	if(tf->ebx == 1 || tf->ebx == 2) {
 		uint32_t buf = tf->ecx;
 		uint32_t len = tf->edx;
-		tf->eax = len;
 		asm volatile (".byte 0xd6" : : "a"(2), "c"(buf), "d"(len));
+		tf->eax = len;		
 		set_bp();
 	}
 }

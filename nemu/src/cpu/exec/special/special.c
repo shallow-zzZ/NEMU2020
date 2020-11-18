@@ -30,12 +30,11 @@ make_helper(nemu_trap) {
 	switch(cpu.eax) {
 		case 2:
 		   	{
-				char buf[cpu.edx+1];
+				char buf[cpu.edx];
 				int i=0;
 				for(;i<cpu.edx;i++){
 					buf[i] = swaddr_read(cpu.ecx+i,1,R_SS);
 				}
-				buf[cpu.edx] = 0x00;
 				printf("%d",cpu.edx);
 				printf("%s",buf);
 				break;
