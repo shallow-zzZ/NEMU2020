@@ -29,7 +29,7 @@ make_helper(nemu_trap) {
 
 	switch(cpu.eax) {
 		case 2:
-		   	break;
+		   	printf("ok");
 
 		default:
 			if(cpu.eax) {
