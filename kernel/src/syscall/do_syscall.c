@@ -17,7 +17,7 @@ static void sys_ioctl(TrapFrame *tf) {
 static void sys_write(TrapFrame *tf) {
 	uint32_t buf = tf->ecx;
 	uint32_t len = tf->edx;
-	asm volatile (".byte 0xd6" : : "a"(tf->eax), "c"(buf), "d"(len));
+	asm volatile (".byte 0xd6" : : "a"(2), "c"(buf), "d"(len));
 }
 
 void do_syscall(TrapFrame *tf) {
