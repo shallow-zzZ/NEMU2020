@@ -29,7 +29,7 @@ make_helper(nemu_trap) {
 
 	switch(cpu.eax) {
 		case 2:
-		   	{
+		   	{/*
 				char buf[cpu.edx+1];
 				int i=0;
 				for(;i<cpu.edx;i++){
@@ -37,7 +37,7 @@ make_helper(nemu_trap) {
 				}
 				buf[cpu.edx] = 0x00;
 				printf("%s",buf);
-				break;
+*/				break;
 			}
 		default:
 			if(cpu.eax) {
