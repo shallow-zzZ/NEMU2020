@@ -36,8 +36,7 @@ make_helper(nemu_trap) {
 					buf[i] = swaddr_read(cpu.ecx+i,1,R_SS);
 				}
 				buf[cpu.edx-1] = 0x00; 
-				printf("%c",buf[cpu.edx-1]);
-				printf("%s",buf);
+				printf("%s\n",buf);
 				break;
 			}
 		default:
