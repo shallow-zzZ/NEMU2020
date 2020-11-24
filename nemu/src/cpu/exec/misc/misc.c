@@ -18,7 +18,7 @@ make_helper(int3) {
 
 make_helper(intn) {
 	decode_i_b(eip+1); 
-	//cpu.eip += 2;
+	cpu.eip += 2;
 	raise_intr(op_src->val);
 	print_asm("int3 0x%x",op_src->val);
 	return 0;
