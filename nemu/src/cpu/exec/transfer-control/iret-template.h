@@ -7,7 +7,7 @@ make_helper(concat(iret_,SUFFIX)) {
 	cpu.eflags = swaddr_read(reg_l(R_ESP)+8, 4, R_SS);
 	reg_l(R_ESP) += 12;
 	print_asm("iret");
-	return 2;
+	return 0;
 }
 
 #include "cpu/exec/template-end.h"
