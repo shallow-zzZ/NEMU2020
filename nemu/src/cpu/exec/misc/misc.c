@@ -2,6 +2,8 @@
 #include "cpu/decode/modrm.h"
 #include "cpu/intr.h"
 
+void device_update();
+
 make_helper(nop) {
 	print_asm("nop");
 	return 1;
@@ -33,5 +35,14 @@ make_helper(lea) {
 
 make_helper(cli) {
 	cpu.IF = 0;
+	print_asm("cli");
+	return 1;
+}
+
+make_helper(hlt) {
+	while(!cpu.IF || !cpu.INTR) {
+		device_update();
+	}
+	print_asm("hlt");
 	return 1;
 }
