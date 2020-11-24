@@ -45,7 +45,7 @@ void init_l1() {
 }
 
 static void l1_read(hwaddr_t addr, void *data) {
-	Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
+	//Assert(addr < HW_MEM_SIZE, "physical address %x is outside of the physical memory!", addr);
 
 	cache_addr temp;
 	temp.addr = addr & ~BURST_MASK;
