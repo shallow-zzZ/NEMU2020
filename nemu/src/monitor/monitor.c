@@ -15,6 +15,8 @@ void init_ddr3();
 void init_l1();
 void init_l2();
 void init_tlb();
+void init_device();
+void init_sdl();
 
 FILE *log_fp = NULL;
 
@@ -42,6 +44,12 @@ void init_monitor(int argc, char *argv[]) {
 
 	/* Initialize the watchpoint pool. */
 	init_wp_pool();
+
+	/* Init the device */
+	init_device();
+
+	/* init sdl */
+	init_sdl();
 
 	/* Display welcome message. */
 	welcome();
