@@ -11,7 +11,7 @@ make_helper(concat(call_i_,SUFFIX)) {
 	if(DATA_BYTE == 2){
 		cpu.eip = cpu.eip & 0x0000ffff;
 	}
-	print_asm(str(instr) " %x", cpu.eip + len + 1);
+	print_asm(str(instr) " %x 0x%x", cpu.eip + len + 1, cpu.eip);
 	return len+1;
 }
 
