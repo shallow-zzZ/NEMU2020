@@ -35,7 +35,7 @@ get_fps() {
  * */
 void
 main_loop(void) {
-	set_bp();
+	//set_bp();
 	int now = 0, target;
 	int num_draw = 0;
 	bool redraw;
