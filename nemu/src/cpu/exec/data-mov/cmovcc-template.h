@@ -22,8 +22,7 @@ make_cmovcc_helper(e)
 //make_cmovcc_helper(np)
 //make_cmovcc_helper(l)
 //make_cmovcc_helper(ge)
-
-//make_cmovcc_helper(le)
+make_cmovcc_helper(le)
 //make_cmovcc_helper(g)
 
 #include "cpu/exec/template-end.h"

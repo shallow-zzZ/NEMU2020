@@ -24,6 +24,5 @@ make_helper_v(cmove)
 //make_helper_v(cmovnp)
 //make_helper_v(cmovl)
 //make_helper_v(cmovge)
-
-//make_helper_v(cmovle)
+make_helper_v(cmovle)
 //make_helper_v(cmovg)
