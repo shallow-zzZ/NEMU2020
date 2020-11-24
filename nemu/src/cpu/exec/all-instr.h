@@ -64,4 +64,5 @@
 #include "transfer-control/js.h"
 #include "transfer-control/jns.h"
 #include "transfer-control/ja.h"
+#include "transfer-control/jb.h"
 #include "transfer-control/jae.h"
