@@ -5,7 +5,6 @@
 make_helper(concat(call_i_,SUFFIX)) {
 	int len = concat(decode_i_,SUFFIX)(eip+1);
 	reg_l(R_ESP) -= DATA_BYTE;
-	//MEM_W(reg_l(R_ESP), cpu.eip + len + 1, R_SS);
         swaddr_write(reg_l(R_ESP), 4, cpu.eip + 4, R_SS);
 	cpu.eip += (DATA_TYPE_S)op_src->val;
 	if(DATA_BYTE == 2){
