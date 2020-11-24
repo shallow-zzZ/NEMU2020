@@ -8,6 +8,7 @@
 #include "data-mov/movext.h"
 #include "data-mov/cltd.h"
 #include "data-mov/pa.h"
+#include "data-mov/cmovcc.h"
 
 #include "arith/dec.h"
 #include "arith/inc.h"
