@@ -44,7 +44,7 @@ main_loop(void) {
 		wait_intr();
 		cli();
 		if (now == tick) {
-			set_bp();
+			//set_bp();
 			sti();
 			continue;
 		}
