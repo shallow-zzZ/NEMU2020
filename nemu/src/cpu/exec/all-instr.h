@@ -43,6 +43,8 @@
 #include "misc/lidt.h"
 #include "misc/std.h"
 #include "misc/cld.h"
+#include "misc/in.h"
+#include "misc/out.h"
 
 #include "special/special.h"
 
