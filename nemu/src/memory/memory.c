@@ -7,15 +7,26 @@ void L1_write(hwaddr_t, size_t, uint32_t);
 PTE read_tlb(lnaddr_t, bool*);
 void update_tlb(PTE, lnaddr_t);
 
+int is_mmio(hwaddr_t);
+uint32_t mmio_read(hwaddr_t , size_t , int);
+void mmio_write(hwaddr_t , size_t , uint32_t , int);
+
 /* Memory accessing interfaces */
 
 uint32_t hwaddr_read(hwaddr_t addr, size_t len) {
+	int map_no = is_mmio(addr);
+	if(~map_no) return mmio_read(addr, len, map_no) & (~0u >> ((4 - len) << 3));
 	return L1_read(addr,len) & (~0u >> ((4 - len) << 3));
 	//return dram_read(addr, len) & (~0u >> ((4 - len) << 3));
 }
 
 void hwaddr_write(hwaddr_t addr, size_t len, uint32_t data) {
-	L1_write(addr, len, data);
+	int map_no = is_mmio(addr);
+	if(~map_no) {
+		mmio_write(addr, len, data, map_no);
+	}else {
+		L1_write(addr, len, data);
+	}
 	//dram_write(addr, len, data);
 }
 
